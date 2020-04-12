@@ -1,53 +1,48 @@
 package Client.View;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.Color;
 
-public class MainWindow extends JFrame implements Standardization{
+import javax.swing.*;
+
+public class MyCourseWindow extends JFrame implements Standardization{
+	private JLabel subTitleLabel = new JLabel("My Courses");
 	private JLabel studentName, studentID;
-	private JLabel subTitleLabel = new JLabel("Main Window");
-	private JButton catalogueB = new JButton("Search Courses");
-	private JButton myCoursesB = new JButton("My Courses");
+	private JButton addB = new JButton("Add Course");
+	private JButton backB = new JButton("Back");
+	private JButton dropB = new JButton("Drop Selected Course");
 	private JPanel north = new JPanel();
 	private JPanel center = new JPanel();
 	private JPanel south = new JPanel();
-
-	public MainWindow() {
-		super("Main Window");
-		setSize(500,500);
-		setTitle("Main Window");
-		setLayout(new BorderLayout());
-		subTitleLabel.setText("Main Window");
-		catalogueB.setFont(buttonFont);
-		catalogueB.setBackground(Color.white);
-		myCoursesB.setFont(buttonFont);
-		myCoursesB.setBackground(Color.white);
+	
+	public MyCourseWindow() {
+		super("My Course Window");
 		getStudentInfo();
-		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
+		setSize(500,500);
+		setTitle("My Course Window");
+		setLayout(new BorderLayout());
 		titleLabel.setFont(titleFont);
 		subTitleLabel.setFont(subTitleFont);
 		north.setBackground(Color.red);
+		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
 		south.setBackground(Color.red);
-		
+		backB.setFont(buttonFont);
+		backB.setBackground(Color.white);
+		dropB.setFont(buttonFont);
+		dropB.setBackground(Color.white);
+		addB.setFont(buttonFont);
+		addB.setBackground(Color.white);
 		north.add(titleLabel);
 		north.add(subTitleLabel);
 		north.add(studentName);
 		north.add(studentID);
-		south.add(catalogueB);
-		south.add(myCoursesB);
 		
+		south.add(addB);
+		south.add(dropB);
+		south.add(backB);
 		add("North", north);
 		add("South", south);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-	
-	public void addCatalogueListener (ActionListener listener) {
-		catalogueB.addActionListener(listener);
-	}
-	
-	public void addMyCoursesListener (ActionListener listener) {
-		myCoursesB.addActionListener(listener);
 	}
 	
 	public void getStudentInfo() {
@@ -63,9 +58,8 @@ public class MainWindow extends JFrame implements Standardization{
 	}
 	
 	public static void main (String []args) {
-		MainWindow main = new MainWindow();
-		main.setVisible(true);
+		MyCourseWindow myCourse = new MyCourseWindow();
+		myCourse.setVisible(true);
 	}
 
-	
 }

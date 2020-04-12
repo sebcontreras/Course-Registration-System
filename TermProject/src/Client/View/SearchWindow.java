@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class SearchWindow extends JFrame implements FontConstants{
-	private JLabel titleLabel = new JLabel("Student Registration System");
+public class SearchWindow extends JFrame implements Standardization{
+	private JLabel studentName, studentID;
 	private JLabel subTitleLabel = new JLabel("Search Window");
 	private JButton searchB = new JButton("Search");
 	private JButton viewB = new JButton("View All Courses");
@@ -19,7 +19,7 @@ public class SearchWindow extends JFrame implements FontConstants{
 		setSize(500,500);
 		setTitle("Search Window");
 		setLayout(new BorderLayout());
-		north.setLayout(new BorderLayout());
+		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
 		north.setBackground(Color.red);
 		south.setBackground(Color.red);
 		titleLabel.setFont(titleFont);
@@ -30,8 +30,12 @@ public class SearchWindow extends JFrame implements FontConstants{
 		viewB.setBackground(Color.white);
 		backB.setFont(buttonFont);
 		backB.setBackground(Color.white);
-		north.add("North", titleLabel);
-		north.add("South", subTitleLabel);
+		getStudentInfo();
+		north.add(titleLabel);
+		north.add(subTitleLabel);
+		north.add(studentName);
+		north.add(studentID);
+		
 		south.add(searchB);
 		south.add(viewB);
 		south.add(backB);
@@ -51,6 +55,18 @@ public class SearchWindow extends JFrame implements FontConstants{
 	
 	public void addBackListener(ActionListener listener) {
 		backB.addActionListener(listener);
+	}
+	
+	public void getStudentInfo() {
+		//method to get student's name
+		//get student's name from controller?
+		String name = "Name: Student's Name";
+		studentName = new JLabel(name);
+		studentName.setFont(studentFont);
+		//get student's ID from controller?
+		String id = "ID: 000000";
+		studentID = new JLabel(id);
+		studentID.setFont(studentFont);
 	}
 	
 	public static void main (String []args) {
