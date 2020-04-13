@@ -16,6 +16,11 @@ public class GUIController {
 		this.comController=comController;
 	}
 	
+	public void displayMainMenu() {
+		frameManager.displayMainWindow();
+		frameManager.addListenersToMainMenu(new mainSearchCoursesListener(), new mainMyCoursesListener());
+	}
+	
 	//listener for "Search Courses" button in main
 	public class mainSearchCoursesListener implements ActionListener{
 		@Override

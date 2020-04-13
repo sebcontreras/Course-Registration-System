@@ -2,6 +2,8 @@ package Client.View;
 //
 import java.awt.event.ActionListener;
 
+import Client.Controller.GUIController.mainMyCoursesListener;
+import Client.Controller.GUIController.mainSearchCoursesListener;
 import Client.Controller.GUIController.myCourseAddCourseListener;
 import Client.Controller.GUIController.myCourseDropCourseListener;
 import Client.Controller.GUIController.myCourseReturnListener;
@@ -22,7 +24,7 @@ public class FrameManager {
 	}
 
 	public void displaySearchWindow() {
-		mainWindow.setVisible(true);
+		searchWindow.setVisible(true);
 	}
 
 	public String [] getCourseFromSearch() {
@@ -79,6 +81,12 @@ public class FrameManager {
 	public void closeMyCourseWindow() {
 		myCourseWindow.setVisible(false);
 		myCourseWindow.dispose();
+	}
+
+	public void addListenersToMainMenu(ActionListener mainSearchCoursesListener,
+			ActionListener mainMyCoursesListener) {
+		mainWindow.addCatalogueListener(mainSearchCoursesListener);
+		mainWindow.addMyCoursesListener(mainMyCoursesListener);
 	}
 
 	

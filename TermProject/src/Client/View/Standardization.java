@@ -13,7 +13,5 @@ public interface Standardization {
 	static final Font buttonFont = new Font("Verdana", Font.PLAIN, 12);
 	static final Font studentFont = new Font("Verdana", Font.PLAIN, 16);
 	
-	//standardizes labels across view
-	static final JLabel titleLabel = new JLabel("Student Registration System");
 	
 }

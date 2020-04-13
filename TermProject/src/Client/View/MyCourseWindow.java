@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MyCourseWindow extends JFrame implements Standardization{
+	private JLabel titleLabel = new JLabel("Student Registration System");
 	private JLabel subTitleLabel = new JLabel("My Courses");
 	private JLabel studentName, studentID;
 	private JButton addB = new JButton("Add Course");
@@ -89,9 +90,9 @@ public class MyCourseWindow extends JFrame implements Standardization{
 		JOptionPane.showMessageDialog(this, string);
 	}
 
-	public static void main (String []args) {
-		MyCourseWindow myCourse = new MyCourseWindow();
-		myCourse.setVisible(true);
-	}
+//	public static void main (String []args) {
+//		MyCourseWindow myCourse = new MyCourseWindow();
+//		myCourse.setVisible(true);
+//	}
 
 }
