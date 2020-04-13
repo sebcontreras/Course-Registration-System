@@ -10,7 +10,7 @@ public class Testing {
 		SearchWindow search = new SearchWindow();
 		
 		FrameManager frameM = new FrameManager(main, myCourse, search);
-		CommunicationController comM = new CommunicationController();
+		CommunicationController comM = new CommunicationController("localhost", 8099);
 		GUIController controller = new GUIController(frameM, comM);
 		controller.displayMainMenu();
 	}

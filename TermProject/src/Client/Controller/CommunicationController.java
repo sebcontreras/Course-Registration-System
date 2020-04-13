@@ -20,8 +20,9 @@ public class CommunicationController {
 		
 	}
 	
-	public static void main(String[] args) throws IOException  {
+	/**public static void main(String[] args) throws IOException  {
 		CommunicationController aClient = new CommunicationController("localhost", 8099);
 		aClient.CommunicateWithServer();
 	}
+	*/
 }
