@@ -57,6 +57,25 @@ public class SearchWindow extends JFrame implements Standardization{
 		backB.addActionListener(listener);
 	}
 	
+	public String [] getCourse() {
+		String input ="";
+		String [] course;
+		while (true) {
+			input = JOptionPane.showInputDialog("Please enter the course you would like to add");
+			course = input.split(" ");
+			if (course[0].length()==4 && course[1].length()==3) {
+				break;
+			}
+			displayMessage("Error. Invalid format. Enter your choice as a 4-letter word followed by the 3-digit number.");
+		}
+		
+		return course;
+	}
+	
+	public void displayMessage(String s) {
+		JOptionPane.showMessageDialog(this, s);
+	}
+	
 	public void getStudentInfo() {
 		//method to get student's name
 		//get student's name from controller?

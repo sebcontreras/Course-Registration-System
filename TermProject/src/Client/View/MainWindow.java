@@ -50,6 +50,8 @@ public class MainWindow extends JFrame implements Standardization{
 		myCoursesB.addActionListener(listener);
 	}
 	
+	
+	
 	public void getStudentInfo() {
 		//method to get student's name
 		//get student's name from controller?

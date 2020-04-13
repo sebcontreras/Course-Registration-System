@@ -2,6 +2,7 @@ package Client.View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -9,7 +10,7 @@ public class MyCourseWindow extends JFrame implements Standardization{
 	private JLabel subTitleLabel = new JLabel("My Courses");
 	private JLabel studentName, studentID;
 	private JButton addB = new JButton("Add Course");
-	private JButton backB = new JButton("Back");
+	private JButton backB = new JButton("Back To Main Menu");
 	private JButton dropB = new JButton("Drop Selected Course");
 	private JPanel north = new JPanel();
 	private JPanel center = new JPanel();
@@ -57,6 +58,37 @@ public class MyCourseWindow extends JFrame implements Standardization{
 		studentID.setFont(studentFont);
 	}
 	
+	public void addAddCourseListener(ActionListener listener) {
+		addB.addActionListener(listener);
+	}
+	
+	public void addDropCourseListener(ActionListener listener) {
+		dropB.addActionListener(listener);
+	}
+	
+	public void addReturnListener(ActionListener listener) {
+		backB.addActionListener(listener);
+	}
+	
+	public String [] getCourse() {
+		String input ="";
+		String [] course;
+		while (true) {
+			input = JOptionPane.showInputDialog("Please enter the course you would like to add");
+			course = input.split(" ");
+			if (course[0].length()==4 && course[1].length()==3) {
+				break;
+			}
+			displayMessage("Error. Invalid format. Enter your choice as a 4-letter word followed by the 3-digit number.");
+		}
+		
+		return course;
+	}
+	
+	private void displayMessage(String string) {
+		JOptionPane.showMessageDialog(this, string);
+	}
+
 	public static void main (String []args) {
 		MyCourseWindow myCourse = new MyCourseWindow();
 		myCourse.setVisible(true);

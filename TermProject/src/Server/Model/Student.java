@@ -1,4 +1,4 @@
-package Server.Module;
+package Server.Model;
 
 public class Student {
 
