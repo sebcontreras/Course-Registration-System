@@ -49,10 +49,10 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			/*
-			 * String [] course = frameManager.getCourseFromMyCourse(); String courseName =
-			 * course[0]; int courseNum = Integer.parseInt(course[1]); if
-			 * (frameManager.checkCourse(courseName, courseNum) && //checkPreq(student,
-			 * courseName, courseNum))
+			 * String [] course = frameManager.getCourseFromMyCourse(); 
+			 * String courseName = course[0]; 
+			 * int courseNum = Integer.parseInt(course[1]); 
+			 * if(frameManager.checkCourse(courseName, courseNum) && //checkPreq(student,courseName, courseNum))
 			 */			
 		}
 	}
@@ -96,6 +96,7 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//display all courses in info text area
+			
 			
 		}
 	}

@@ -1,12 +1,35 @@
 package Server.Model;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
+
+import Client.Model.Registration;
 
 public class Student {
 
 	private String studentName;
 	private int studentId;
 	private ArrayList<Registration> studentRegList;
+	private Socket aSocket;
+	private BufferedReader socketIn;
+	private PrintWriter socketOut;
+	
+	public Student (String studentName, int studentId, Socket s) {
+		this.setStudentName(studentName);
+		this.setStudentId(studentId);
+		aSocket = s;
+		studentRegList = new ArrayList<Registration>();
+		try {
+			socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
+			socketOut = new PrintWriter((aSocket.getOutputStream()), true);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public Student (String studentName, int studentId) {
 		this.setStudentName(studentName);

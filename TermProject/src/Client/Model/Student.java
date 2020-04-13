@@ -1,5 +1,6 @@
 package Client.Model;
 
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class Student {
@@ -7,10 +8,12 @@ public class Student {
 	private String studentName;
 	private int studentId;
 	private ArrayList<Registration> studentRegList;
+	private Socket aSocket;
 	
-	public Student (String studentName, int studentId) {
+	public Student (String studentName, int studentId, Socket s) {
 		this.setStudentName(studentName);
 		this.setStudentId(studentId);
+		aSocket = s;
 		studentRegList = new ArrayList<Registration>();
 	}
 
