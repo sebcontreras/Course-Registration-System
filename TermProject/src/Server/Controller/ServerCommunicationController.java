@@ -7,7 +7,9 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import Server.Model.Course;
 import Server.Model.CourseCatalogue;
+import Server.Model.CourseOffering;
 import Server.Model.Student;
 
 //
@@ -17,11 +19,11 @@ public class ServerCommunicationController {
 	private PrintWriter socketOut;
 	private BufferedReader socketIn;
 	private ServerSocket serverSocket;
-	private CourseCatalogue theCourseList;
+	private CourseCatalogue studentList;
 
 	public ServerCommunicationController(int portNumber) {
 		try {
-			theCourseList = new CourseCatalogue();
+			studentList = new CourseCatalogue();
 			serverSocket = new ServerSocket(portNumber);
 			aSocket = serverSocket.accept();
 			System.out.println("Connection accepted by server.");
@@ -36,6 +38,7 @@ public class ServerCommunicationController {
 		int choice = 0;
 		while(true) {
 			String result = "";
+			try {
 			choice =  Integer.parseInt(socketIn.readLine());
 			switch(choice) {
 			case 1:
@@ -63,23 +66,32 @@ public class ServerCommunicationController {
 				socketOut.println(result);
 				break;
 			}
+			}catch(IOException e) {
+				e.getStackTrace();
+			}
+			try {
+				socketIn.close();
+				socketOut.close();
+			}catch(IOException e) {
+				e.getStackTrace();
+			}
 		}
 	}
 	
-	public void listStudents() {
+	public String listStudents() {
 		studentList.listStudents();
 	}
 
-	public void viewStudentCourse() {
+	public String viewStudentCourse() {
 		int id = inputStudentId();
 		System.out.println(studentList.viewStudentCourse(id));
 	}
 
 	public String viewCourseCatalogue() {
-		return theCourseList.toString();
+		return studentList.toString();
 	}
 
-	public void removeCourseFromStudent() {
+	public String removeCourseFromStudent() {
 		
 		String name = inputCourseName();
 		int num = inputCourseNum();
@@ -90,7 +102,7 @@ public class ServerCommunicationController {
 		}
 	}
 
-	public void addCourseToStudent() {
+	public String addCourseToStudent() {
 		
 		String name = inputCourseName();
 		int num = inputCourseNum();
@@ -106,7 +118,7 @@ public class ServerCommunicationController {
 		}
 	}
 
-	public void searchForCourse(){
+	public String searchForCourse(){
 		System.out.println(theCourseList.searchCat(inputCourseName(), inputCourseNum()));
 	}
 

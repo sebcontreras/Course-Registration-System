@@ -31,13 +31,22 @@ public class CommunicationController {
 	
 	public void CommunicateWithServer() {
 		String response = "";
+		int choice = 0;
 		while(true) {
 			try {
+				//assign numbers to different buttons pressed, have method that determines and returns the number? 
 				//send a number to tell the server what action to perform
+				socketOut.println(choice);
 				response = socketIn.readLine();
 				//send response to where its needed in the client package
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+			try {
+				socketIn.close();
+				socketOut.close();
+			}catch(IOException e) {
+				e.getStackTrace();
 			}
 		}
 	}
