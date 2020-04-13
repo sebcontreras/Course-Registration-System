@@ -3,6 +3,7 @@ package Client.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Client.Model.Course;
 import Client.Model.Student;
 import Client.View.FrameManager;
 
@@ -16,9 +17,19 @@ public class GUIController {
 		this.comController=comController;
 	}
 	
+	public GUIController (FrameManager frameManager, CommunicationController comController, Student student) {
+		this.frameManager=frameManager;
+		this.comController=comController;
+		this.student = student;
+	}
+	
 	public void displayMainMenu() {
 		frameManager.displayMainWindow();
 		frameManager.addListenersToMainMenu(new mainSearchCoursesListener(), new mainMyCoursesListener());
+	}
+	
+	public Student getStudent() {
+		return student;
 	}
 	
 	//listener for "Search Courses" button in main

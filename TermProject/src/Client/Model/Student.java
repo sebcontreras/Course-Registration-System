@@ -16,6 +16,13 @@ public class Student {
 		aSocket = s;
 		studentRegList = new ArrayList<Registration>();
 	}
+	
+	//without socket implementation
+	public Student (String studentName, int studentId) {
+		this.setStudentName(studentName);
+		this.setStudentId(studentId);
+		studentRegList = new ArrayList<Registration>();
+	}
 
 	public String getStudentName() {
 		return studentName;
