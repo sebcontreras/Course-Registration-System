@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class SearchWindow extends JFrame implements Standardization{
+	private JLabel titleLabel = new JLabel("Student Registration System");
 	private JLabel studentName, studentID;
 	private JLabel subTitleLabel = new JLabel("Search Window");
 	private JButton searchB = new JButton("Search");
@@ -88,8 +89,8 @@ public class SearchWindow extends JFrame implements Standardization{
 		studentID.setFont(studentFont);
 	}
 	
-	public static void main (String []args) {
-		SearchWindow search = new SearchWindow();
-		search.setVisible(true);
-	}
+//	public static void main (String []args) {
+//		SearchWindow search = new SearchWindow();
+//		search.setVisible(true);
+//	}
 }

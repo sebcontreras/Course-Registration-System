@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame implements Standardization{
+	private JLabel titleLabel = new JLabel("Student Registration System");
 	private JLabel studentName, studentID;
 	private JLabel subTitleLabel = new JLabel("Main Window");
 	private JButton catalogueB = new JButton("Search Courses");
@@ -18,18 +19,16 @@ public class MainWindow extends JFrame implements Standardization{
 		setSize(500,500);
 		setTitle("Main Window");
 		setLayout(new BorderLayout());
-		subTitleLabel.setText("Main Window");
+		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
+		north.setBackground(Color.red);
+		south.setBackground(Color.red);
+		titleLabel.setFont(titleFont);
+		subTitleLabel.setFont(subTitleFont);
 		catalogueB.setFont(buttonFont);
 		catalogueB.setBackground(Color.white);
 		myCoursesB.setFont(buttonFont);
 		myCoursesB.setBackground(Color.white);
 		getStudentInfo();
-		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
-		titleLabel.setFont(titleFont);
-		subTitleLabel.setFont(subTitleFont);
-		north.setBackground(Color.red);
-		south.setBackground(Color.red);
-		
 		north.add(titleLabel);
 		north.add(subTitleLabel);
 		north.add(studentName);
@@ -64,10 +63,10 @@ public class MainWindow extends JFrame implements Standardization{
 		studentID.setFont(studentFont);
 	}
 	
-	public static void main (String []args) {
-		MainWindow main = new MainWindow();
-		main.setVisible(true);
-	}
+//	public static void main (String []args) {
+//		MainWindow main = new MainWindow();
+//		main.setVisible(true);
+//	}
 
 	
 }
