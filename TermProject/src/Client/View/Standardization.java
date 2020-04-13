@@ -5,7 +5,7 @@ import java.awt.Font;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+//
 public interface Standardization {
 	//standardizes fonts across view 
 	static final Font titleFont = new Font("Verdana", Font.BOLD, 18);
