@@ -29,9 +29,9 @@ public class FrameManager {
 
 		//MUST BE COMPLETED
 		//checks course in database? returns true if actual course that can be enrolled
-		public boolean checkCourse(String courseName, int courseNum) {
-			return false;
-		}
+//		public boolean checkCourse(String courseName, int courseNum) {
+//			return false;
+//		}
 
 	public void sendMessagetoSearchWindow(String string) {
 		searchWindow.displayMessage(string);	
