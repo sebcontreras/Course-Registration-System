@@ -1,6 +1,9 @@
 package Server.Controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -11,48 +14,52 @@ import Server.Model.Student;
 public class ServerCommunicationController {
 
 	private Socket aSocket;
+	private PrintWriter socketOut;
+	private BufferedReader socketIn;
 	private ServerSocket serverSocket;
-	private CourseCatalogue theCourseList;
 
 	public ServerCommunicationController(int portNumber) {
 		try {
 			serverSocket = new ServerSocket(portNumber);
 			aSocket = serverSocket.accept();
-			//Student theStudent = new Student("Sebastian",100,serverSocket.accept());
 			System.out.println("Connection accepted by server.");
+			socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
+			socketOut = new PrintWriter((aSocket.getOutputStream()), true);
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	private void communicateWithClient() {
+		int choice = 0;
 		while(true) {
-			
+			String result = "";
+			choice =  Integer.parseInt(socketIn.readLine());
 			switch(choice) {
 			case 1:
-				searchForCourse();
+				result = searchForCourse();
+				socketOut.println(result);
 				break;
 			case 2: 
-				addCourseToStudent();
+				result = addCourseToStudent();
+				socketOut.println(result);
 				break;
 			case 3:
-				removeCourseFromStudent();
+				result = removeCourseFromStudent();
+				socketOut.println(result);
 				break;
 			case 4:
-				viewCourseCatalogue();
+				result = viewCourseCatalogue();
+				socketOut.println(result);
 				break;
 			case 5:
-				viewStudentCourse();
+				result = viewStudentCourse();
+				socketOut.println(result);
 				break;
 			case 6:
-				listStudents();
+				result = listStudents();
+				socketOut.println(result);
 				break;
-			/*case 7:
-				System.out.println("\nGood Bye!");
-				System.exit(1);
-			default:
-				System.out.println("\nInvalid selection Please try again!");
-				break;*/
 			}
 		}
 	}

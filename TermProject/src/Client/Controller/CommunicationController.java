@@ -20,7 +20,7 @@ public class CommunicationController {
 	public CommunicationController(String serverName, int portNumber) {
 		try {
 			aSocket = new Socket(serverName, portNumber);
-			socketIn = new BufferedReader(new InputStreamReader(System.in));
+			socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
 			socketOut = new PrintWriter((aSocket.getOutputStream()), true);
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -30,8 +30,15 @@ public class CommunicationController {
 	
 	
 	public void CommunicateWithServer() {
+		String response = "";
 		while(true) {
-			//send a number to tell the server what action to perform
+			try {
+				//send a number to tell the server what action to perform
+				response = socketIn.readLine();
+				//send response to where its needed in the client package
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
