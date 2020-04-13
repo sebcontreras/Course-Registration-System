@@ -1,9 +1,10 @@
 package Client.Model;
 
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Student {
+public class Student implements Serializable{
 	
 	private String studentName;
 	private int studentId;
