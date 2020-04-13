@@ -54,7 +54,7 @@ public class MainWindow extends JFrame implements Standardization{
 	public void getStudentInfo() {
 		//method to get student's name
 		//get student's name from controller?
-		String name = frame
+		//String name = frame
 		String name = "Name: Student's Name";
 		studentName = new JLabel(name);
 		studentName.setFont(studentFont);
