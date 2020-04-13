@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import Client.Model.Registration;
+import Server.Model.Registration;
 
 public class Student implements Serializable{
 
