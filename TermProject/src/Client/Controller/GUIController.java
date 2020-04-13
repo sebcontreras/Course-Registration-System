@@ -2,7 +2,9 @@ package Client.Controller;
 //
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import Client.Model.Course;
 import Client.Model.Student;
 import Client.View.FrameManager;
 
