@@ -27,6 +27,7 @@ public class CommunicationController {
 		}
 	}
 	
+
 	
 	
 	public void CommunicateWithServer() {
@@ -36,8 +37,10 @@ public class CommunicationController {
 			try {
 				//assign numbers to different buttons pressed, have method that determines and returns the number? 
 				//send a number to tell the server what action to perform
-				socketOut.println(choice);
+//				socketOut.println(choice);
 				response = socketIn.readLine();
+				choice = Integer.parseInt(response);
+				socketOut.println(choice);
 				//send response to where its needed in the client package
 			} catch (IOException e) {
 				e.printStackTrace();
