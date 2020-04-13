@@ -2,11 +2,7 @@ package Client.View;
 //
 import java.awt.event.ActionListener;
 
-import Client.Controller.GUIController.mainMyCoursesListener;
-import Client.Controller.GUIController.mainSearchCoursesListener;
-import Client.Controller.GUIController.myCourseAddCourseListener;
-import Client.Controller.GUIController.myCourseDropCourseListener;
-import Client.Controller.GUIController.myCourseReturnListener;
+
 import Client.Model.Student;
 
 
