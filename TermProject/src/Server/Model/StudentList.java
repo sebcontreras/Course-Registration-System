@@ -74,12 +74,4 @@ public class StudentList {
 		}
 		System.out.println("---------------------------------------");
 		}
-
-	public CourseCatalogue getTheCourses() {
-		return theCourses;
-	}
-
-	public void setTheCourses(CourseCatalogue theCourses) {
-		this.theCourses = theCourses;
-	}
 }

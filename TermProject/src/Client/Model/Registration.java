@@ -6,19 +6,7 @@ public class Registration {
 	private char grade;
 	
 	public Registration(Student st, CourseOffering of) {
-		completeRegistration(st, of);
 		grade = '-';
-	}
-	
-	public void completeRegistration (Student st, CourseOffering of) {
-		theStudent = st;
-		theOffering = of;
-		addRegistration ();
-	}
-	
-	private void addRegistration () {
-		theStudent.addRegistration(this);
-		theOffering.addRegistration(this);
 	}
 	
 	
