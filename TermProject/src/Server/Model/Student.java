@@ -16,20 +16,12 @@ public class Student implements Serializable{
 	private int studentId;
 	private ArrayList<Registration> studentRegList;
 	private Socket aSocket;
-	private BufferedReader socketIn;
-	private PrintWriter socketOut;
+	private CourseCatalogue courseList;
 	
-	public Student (String studentName, int studentId, Socket s) {
-		this.setStudentName(studentName);
-		this.setStudentId(studentId);
+	public Student ( Socket s) {
+		courseList = new CourseCatalogue();
 		aSocket = s;
 		studentRegList = new ArrayList<Registration>();
-		try {
-			socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
-			socketOut = new PrintWriter((aSocket.getOutputStream()), true);
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public Student (String studentName, int studentId) {
