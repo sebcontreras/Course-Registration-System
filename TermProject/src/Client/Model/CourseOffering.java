@@ -12,7 +12,7 @@ public class CourseOffering {
 	public CourseOffering (int secNum, int secCap) {
 		this.setSecNum(secNum);
 		this.setSecCap(secCap);
-		offeringRegList = new ArrayList <Registration>();
+		setOfferingRegList(new ArrayList <Registration>());
 	}
 	public int getSecNum() {
 		return secNum;
@@ -32,14 +32,18 @@ public class CourseOffering {
 	public void setTheCourse(Course theCourse) {
 		this.theCourse = theCourse;
 	}
+	
+	public ArrayList <Registration> getOfferingRegList() {
+		return offeringRegList;
+	}
+	public void setOfferingRegList(ArrayList <Registration> offeringRegList) {
+		this.offeringRegList = offeringRegList;
+	}
 	@Override
 	public String toString () {
 		String st = "\n";
 		st += getTheCourse().getCourseName() + " " + getTheCourse().getCourseNum() + "\n";
 		st += "Section Num: " + getSecNum() + ", section cap: "+ getSecCap() +"\n";
 		return st;
-	}
-	public void addRegistration(Registration registration) {
-		offeringRegList.add(registration);
 	}
 }

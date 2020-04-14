@@ -13,6 +13,7 @@ public class StudentList {
 	private void loadFromDataBase() {
 		DBManager db = new DBManager();
 		setStudentList(db.readStudentFromDataBase());
+		
 	}
 	
 	public void setStudentList(ArrayList <Student> studentList) {

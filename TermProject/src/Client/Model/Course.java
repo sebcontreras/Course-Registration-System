@@ -12,20 +12,8 @@ public class Course {
 	public Course(String courseName, int courseNum) {
 		this.setCourseName(courseName);
 		this.setCourseNum(courseNum);
-		preReq = new ArrayList<Course>();
+		setPreReq(new ArrayList<Course>());
 		offeringList = new ArrayList<CourseOffering>();
-	}
-
-	public void addOffering(CourseOffering offering) {
-		if (offering != null && offering.getTheCourse() == null) {
-			offering.setTheCourse(this);
-			if (!offering.getTheCourse().getCourseName().equals(courseName) || offering.getTheCourse().getCourseNum() != courseNum) {
-				System.err.println("Error! This section belongs to another course!");
-				return;
-			}
-			
-			offeringList.add(offering);
-		}
 	}
 
 	public String getCourseName() {
@@ -43,6 +31,14 @@ public class Course {
 	public void setCourseNum(int courseNum) {
 		this.courseNum = courseNum;
 	}
+
+	public ArrayList<Course> getPreReq() {
+		return preReq;
+	}
+
+	public void setPreReq(ArrayList<Course> preReq) {
+		this.preReq = preReq;
+	}
 	@Override
 	public String toString () {
 		String st = "\n";
@@ -52,22 +48,6 @@ public class Course {
 			st += c;
 		st += "\n-------\n";
 		return st;
-	}
-
-	public CourseOffering getCourseOfferingAt(int i) {
-		if (i < 0 || i >= offeringList.size() )
-			return null;
-		else
-			return offeringList.get(i);
-	}
-	
-	public boolean equals(Course comp) {
-		
-		if(this.getCourseName().equals(comp.getCourseName())) {
-			if(this.getCourseNum() == comp.getCourseNum())
-				return true;
-		}
-		return false;
 	}
 }
 

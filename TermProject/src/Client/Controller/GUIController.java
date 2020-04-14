@@ -23,8 +23,8 @@ public class GUIController {
 	private Socket socket;
 	private BufferedReader socketIn;
 	private PrintWriter socketOut;
-	private ObjectInputStream objectStreamIn;
-	private ObjectOutputStream objectStreamOut;
+//	private ObjectInputStream objectStreamIn;
+//	private ObjectOutputStream objectStreamOut;
 
 	public GUIController(FrameManager frameManager, CommunicationController comController, Socket socket) {
 		this.socket = socket;

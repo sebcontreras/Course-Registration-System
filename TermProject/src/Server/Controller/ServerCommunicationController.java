@@ -18,20 +18,16 @@ import Server.Model.Student;
 public class ServerCommunicationController {
 
 	private Socket pipe;
-	private PrintWriter socketOut;
-	private BufferedReader socketIn;
 	private ServerSocket serverSocket;
 
 	private ObjectInputStream objectInputStream;
 	private ObjectOutputStream objectOutputStream;
 	
-	private CourseCatalogue theCourseList;
 	private Student theStudent;
 
 	public ServerCommunicationController(int portNumber) {
 		try {
 			theStudent = null;
-			theCourseList = new CourseCatalogue();
 	
 			serverSocket = new ServerSocket(portNumber);
 			
@@ -39,83 +35,58 @@ public class ServerCommunicationController {
 			objectInputStream = new ObjectInputStream(pipe.getInputStream());
 			objectOutputStream = new ObjectOutputStream(pipe.getOutputStream());
 			
-			theStudent = (Student)objectInputStream.readObject();
-			//here changes can be made to theStudent
-			theStudent.setStudentName("ServerChange");
-			objectOutputStream.writeObject(theStudent);
-			
-			//I think this should close at a later point?
 			objectInputStream.close();
 			objectOutputStream.close();
-
-			System.out.println("Connection accepted by server.");
-			
-			//socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
-			//socketOut = new PrintWriter((aSocket.getOutputStream()), true);
 		}catch (IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 	}
 	
 	private void communicateWithClient() {
 		int choice = 0;
+		theStudent = new Student();
+		try {
+			objectOutputStream.writeObject(theStudent);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		while(true) {
-			Student theStudent = new Student("Sevickey", 1234, serverSocket.accept());
-			String result = "";
 			try {
-			choice =  Integer.parseInt(socketIn.readLine());
+			Student temp = (Student)objectInputStream.readObject();
+			choice = temp.getChoice();
 			switch(choice) {
 			case 1:
-				result = searchForCourse();
-				socketOut.println(result);
+				searchForCourse();
+				objectOutputStream.writeObject(theStudent);
 				break;
 			case 2: 
-				result = addCourseToStudent();
-				socketOut.println(result);
+				addCourseToStudent();
+				objectOutputStream.writeObject(theStudent);
 				break;
 			case 3:
-				result = removeCourseFromStudent();
-				socketOut.println(result);
+				removeCourseFromStudent();
+				objectOutputStream.writeObject(theStudent);
 				break;
 			case 4:
-				result = viewCourseCatalogue();
-				socketOut.println(result);
-				break;
-			case 5:
-				result = viewStudentCourse();
-				socketOut.println(result);
-				break;
-			case 6:
-				result = listStudents();
-				socketOut.println(result);
+				viewStudentCourse();
+				objectOutputStream.writeObject(theStudent);
 				break;
 			}
-			}catch(IOException e) {
+			}catch(IOException | ClassNotFoundException e) {
 				e.getStackTrace();
 			}
 			try {
-				socketIn.close();
-				socketOut.close();
+				objectInputStream.close();
+				objectOutputStream.close();
 			}catch(IOException e) {
 				e.getStackTrace();
 			}
 		}
-	}
-	
-	public String listStudents() {
-		studentList.listStudents();
 	}
 
 	public String viewStudentCourse() {
 		int id = inputStudentId();
 		System.out.println(studentList.viewStudentCourse(id));
-	}
-
-	public String viewCourseCatalogue() {
-		return studentList.toString();
 	}
 
 	public String removeCourseFromStudent() {
