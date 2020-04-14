@@ -13,6 +13,7 @@ public class StudentList {
 	private void loadFromDataBase() {
 		DBManager db = new DBManager();
 		setStudentList(db.readStudentFromDataBase());
+		
 	}
 	
 	public void setStudentList(ArrayList <Student> studentList) {
@@ -73,4 +74,12 @@ public class StudentList {
 		}
 		System.out.println("---------------------------------------");
 		}
+
+	public CourseCatalogue getTheCourses() {
+		return theCourses;
+	}
+
+	public void setTheCourses(CourseCatalogue theCourses) {
+		this.theCourses = theCourses;
+	}
 }

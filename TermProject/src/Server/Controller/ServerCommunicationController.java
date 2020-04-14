@@ -25,13 +25,11 @@ public class ServerCommunicationController {
 	private ObjectInputStream objectInputStream;
 	private ObjectOutputStream objectOutputStream;
 	
-	private CourseCatalogue theCourseList;
 	private Student theStudent;
 
 	public ServerCommunicationController(int portNumber) {
 		try {
 			theStudent = null;
-			theCourseList = new CourseCatalogue();
 	
 			serverSocket = new ServerSocket(portNumber);
 			
@@ -63,7 +61,11 @@ public class ServerCommunicationController {
 	private void communicateWithClient() {
 		int choice = 0;
 		while(true) {
-			Student theStudent = new Student("Sevickey", 1234, serverSocket.accept());
+			try {
+				theStudent = new Student(serverSocket.accept());
+			} catch (IOException e1) {
+				e1.getStackTrace();
+			}
 			String result = "";
 			try {
 			choice =  Integer.parseInt(socketIn.readLine());
@@ -81,15 +83,7 @@ public class ServerCommunicationController {
 				socketOut.println(result);
 				break;
 			case 4:
-				result = viewCourseCatalogue();
-				socketOut.println(result);
-				break;
-			case 5:
 				result = viewStudentCourse();
-				socketOut.println(result);
-				break;
-			case 6:
-				result = listStudents();
 				socketOut.println(result);
 				break;
 			}
@@ -104,18 +98,10 @@ public class ServerCommunicationController {
 			}
 		}
 	}
-	
-	public String listStudents() {
-		studentList.listStudents();
-	}
 
 	public String viewStudentCourse() {
 		int id = inputStudentId();
 		System.out.println(studentList.viewStudentCourse(id));
-	}
-
-	public String viewCourseCatalogue() {
-		return studentList.toString();
 	}
 
 	public String removeCourseFromStudent() {
