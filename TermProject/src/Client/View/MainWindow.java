@@ -50,7 +50,6 @@ public class MainWindow extends JFrame implements Standardization{
 	}
 	
 	
-	
 	public void getStudentInfo() {
 		//method to get student's name
 		//get student's name from controller?

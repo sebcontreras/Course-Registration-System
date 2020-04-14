@@ -3,6 +3,8 @@ package Server.Controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,21 +17,45 @@ import Server.Model.Student;
 //
 public class ServerCommunicationController {
 
-	private Socket aSocket;
+	private Socket pipe;
 	private PrintWriter socketOut;
 	private BufferedReader socketIn;
 	private ServerSocket serverSocket;
-	private CourseCatalogue studentList;
+
+	private ObjectInputStream objectInputStream;
+	private ObjectOutputStream objectOutputStream;
+	
+	private CourseCatalogue theCourseList;
+	private Student theStudent;
 
 	public ServerCommunicationController(int portNumber) {
 		try {
-			studentList = new CourseCatalogue();
+			theStudent = null;
+			theCourseList = new CourseCatalogue();
+	
 			serverSocket = new ServerSocket(portNumber);
-			aSocket = serverSocket.accept();
+			
+			pipe = serverSocket.accept();
+			objectInputStream = new ObjectInputStream(pipe.getInputStream());
+			objectOutputStream = new ObjectOutputStream(pipe.getOutputStream());
+			
+			theStudent = (Student)objectInputStream.readObject();
+			//here changes can be made to theStudent
+			theStudent.setStudentName("ServerChange");
+			objectOutputStream.writeObject(theStudent);
+			
+			//I think this should close at a later point?
+			objectInputStream.close();
+			objectOutputStream.close();
+
 			System.out.println("Connection accepted by server.");
-			socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
-			socketOut = new PrintWriter((aSocket.getOutputStream()), true);
+			
+			//socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
+			//socketOut = new PrintWriter((aSocket.getOutputStream()), true);
 		}catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -37,6 +63,7 @@ public class ServerCommunicationController {
 	private void communicateWithClient() {
 		int choice = 0;
 		while(true) {
+			Student theStudent = new Student("Sevickey", 1234, serverSocket.accept());
 			String result = "";
 			try {
 			choice =  Integer.parseInt(socketIn.readLine());
