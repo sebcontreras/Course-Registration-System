@@ -20,14 +20,13 @@ public class StudentList {
 		this.studentList = studentList;
 	}
 	
-	private Student findStudent(int id) {
+	public Student findStudent(int id) {
 		
 		for(Student x : studentList) {
 			if(x.getStudentId() == id) {
 				return x;
 			}
 		}
-		System.out.println("Student with id " + id + " could not be found");
 		return null;
 	}
 	
@@ -42,17 +41,16 @@ public class StudentList {
 		}
 	}
 	
-	public void removeCourseReg(int id, Course course) {
+	public boolean removeCourseReg(int id, Course course) {
 		
 		Student target = findStudent(id);
 		
 		if(target != null) {
 			if(target.removeCourse(course)) {
-				System.out.println("The Course Was Successfully Removed");
-				return;
+				return true;
 			}
 		}
-		System.out.println("The Course Could Not Be Removed");
+		return false;
 	}
 	
 	public String viewStudentCourse(int id) {

@@ -27,6 +27,10 @@ public class Course {
 			offeringList.add(offering);
 		}
 	}
+	
+	public ArrayList<CourseOffering> getOfferingList(){
+		return offeringList;
+	}
 
 	public String getCourseName() {
 		return courseName;

@@ -8,12 +8,25 @@ public class CourseOffering {
 	private int secCap;
 	private Course theCourse;
 	private ArrayList <Registration> offeringRegList;
+	private boolean full;
 	
 	public CourseOffering (int secNum, int secCap) {
 		this.setSecNum(secNum);
 		this.setSecCap(secCap);
 		offeringRegList = new ArrayList <Registration>();
 	}
+	
+	public boolean isFull() {
+		if (offeringRegList.size()<secCap) {
+			full=false;
+		}
+		else {
+			full=true;
+		}
+		return full;
+	}
+	
+	
 	public int getSecNum() {
 		return secNum;
 	}

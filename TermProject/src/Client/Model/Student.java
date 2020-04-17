@@ -1,8 +1,12 @@
 package Client.Model;
 
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
+import Server.Model.Course;
+import Server.Model.CourseCatalogue;
 import Server.Model.Registration;
 
 public class Student implements Serializable{
@@ -12,8 +16,19 @@ public class Student implements Serializable{
 	private ArrayList<Registration> studentRegList;
 	private CourseCatalogue courseList;
 	private int choice;
+
 	
-	public Student () {}
+	
+	public Student () {
+		setCourseList(new CourseCatalogue());
+		studentRegList = new ArrayList<Registration>();
+	}
+	
+	public Student (String studentName, int studentId) {
+		this.setStudentName(studentName);
+		this.setStudentId(studentId);
+		studentRegList = new ArrayList<Registration>();
+	}
 
 	public String getStudentName() {
 		return studentName;
@@ -37,12 +52,56 @@ public class Student implements Serializable{
 		return st;
 	}
 
-	public ArrayList<Registration> getStudentRegList() {
-		return studentRegList;
+public void addRegistration(Registration registration) {
+		
+		if(studentRegList.size() > 5) {
+			System.out.println(studentName + " is already registered to 6 courses");
+		}else if(checkCourseReg(registration)) {
+			System.out.println(studentName + " is already registered to that course");
+		}else
+			studentRegList.add(registration);
+
+		
+	}
+	
+	private boolean checkCourseReg(Registration reg) {
+		
+		if(studentRegList.size() <= 0)
+			return false;
+		
+		for(Registration regList : studentRegList) {
+			
+			String t1 = reg.getTheOffering().getTheCourse().getCourseName();
+			String t2 = regList.getTheOffering().getTheCourse().getCourseName();
+			int n1 = reg.getTheOffering().getTheCourse().getCourseNum();
+			int n2 = regList.getTheOffering().getTheCourse().getCourseNum();
+			
+			if(t1.equals(t2) && n1 == n2) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean removeCourse(Course course) {
+		
+		for(Registration i : studentRegList) {
+			
+			if(i.getTheOffering().getTheCourse().equals(course)) {
+				studentRegList.remove(i);
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public void setStudentRegList(ArrayList<Registration> studentRegList) {
-		this.studentRegList = studentRegList;
+	public String regListToString() {
+		
+		String str = "";
+		for(Registration reg : studentRegList) {
+			str += reg;
+		}
+		return str;
 	}
 
 	public CourseCatalogue getCourseList() {

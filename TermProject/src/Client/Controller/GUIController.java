@@ -20,20 +20,12 @@ public class GUIController {
 	private FrameManager frameManager;
 	private CommunicationController comController;
 	private Student student;
-	private Socket socket;
-	private BufferedReader socketIn;
-	private PrintWriter socketOut;
-//	private ObjectInputStream objectStreamIn;
-//	private ObjectOutputStream objectStreamOut;
 
-	public GUIController(FrameManager frameManager, CommunicationController comController, Socket socket) {
-		this.socket = socket;
-		try {
-			socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			socketOut = new PrintWriter(socket.getOutputStream(), true);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+
+
+	public GUIController(FrameManager frameManager, CommunicationController comController) {
+
 		this.frameManager = frameManager;
 		this.comController = comController;
 	}
@@ -86,6 +78,7 @@ public class GUIController {
 			String courseName = course[0]; 
 			int courseNum = Integer.parseInt(course[1]);
 			
+			
 			 
 		}
 	}
@@ -111,17 +104,18 @@ public class GUIController {
 	public class searchSearchListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String[] course = frameManager.getCourseFromSearch();
+			String[] course = frameManager.getCourseFromSearch(); //gets user input for course to search
 			String courseName = course[0];
 			int courseNum = Integer.parseInt(course[1]);
-			Course toSearch = checkCourse(courseName, courseNum);
-			if (toSearch!=null) {
-				frameManager.sendMessagetoSearchWindow(
-						"Course Found! Course Information is as follows:\n" + course[0] + " " + course[1] + "\n");
-				// *needs to print out an object*
-			} else {
-				frameManager.sendMessagetoSearchWindow("Sorry, course not found!");
-			}
+			
+			
+//			if (toSearch!=null) {
+//				frameManager.sendMessagetoSearchWindow(
+//						"Course Found! Course Information is as follows:\n" + course[0] + " " + course[1] + "\n");
+//				// *needs to print out an object*
+//			} else {
+//				frameManager.sendMessagetoSearchWindow("Sorry, course not found!");
+//			}
 		}
 	}
 
@@ -144,31 +138,7 @@ public class GUIController {
 
 	}
 	
-	public Course checkCourse(String courseName, int courseID) {
-		socketOut.println("1");
-		socketOut.flush();
-		socketOut.println(courseName+" "+courseID);
-		socketOut.flush();
-		String result="";
-		try {
-			result = socketIn.readLine();
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		if(result.contains("NOT FOUND")) {
-			return null;
-		}
-		else {
-			Course toReturn = null;
-			try {
-				toReturn= (Course)objectStreamIn.readObject();
-			}catch(ClassNotFoundException | IOException e) {
-				frameManager.sendMessagetoSearchWindow("Error. Please Try Again! (ClassNotFoundException)");
-			}
-			return toReturn;
-		}
-		
-	}
+
 	
 
 }

@@ -27,14 +27,9 @@ public class CourseCatalogue {
 				return c;
 			}	
 		}
-		displayCourseNotFoundError();
 		return null;
 	}
 	
-	private void displayCourseNotFoundError() {
-		System.err.println("Course was not found!");
-		
-	}
 	public ArrayList <Course> getCourseList() {
 		return courseList;
 	}

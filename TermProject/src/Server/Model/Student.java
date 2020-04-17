@@ -1,7 +1,9 @@
 package Server.Model;
 
 
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
 import Server.Model.Registration;
@@ -13,6 +15,7 @@ public class Student implements Serializable{
 	private ArrayList<Registration> studentRegList;
 	private CourseCatalogue courseList;
 	private int choice;
+
 	
 	public Student () {
 		setCourseList(new CourseCatalogue());
