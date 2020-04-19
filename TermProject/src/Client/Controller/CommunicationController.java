@@ -10,6 +10,8 @@ import java.net.Socket;
 
 
 import Client.Model.*;
+import Server.Controller.DBController;
+import Server.Controller.ServerCommunicationController;
 
 //
 public class CommunicationController {
@@ -29,9 +31,26 @@ public class CommunicationController {
 		}
 	}
 	
-	public void sendToServer(String s) {
-		socketOut.println(s);
+	public String communicate () {
+		String response = null;
+		while (true) {
+			try {
+				response = socketIn.readLine();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+			if (response.contains("\0")) {
+				response = response.replace("\0", "");
+				break;
+			}
+		}
+		return response;
 	}
+	
+	public void communicateWithServer(String line) {
+		socketOut.print(line);
+	}
+	
 	
 	
 	

@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import Client.Model.Course;
 import Client.Model.Student;
 import Client.View.FrameManager;
@@ -20,14 +22,33 @@ public class GUIController {
 	private FrameManager frameManager;
 	private CommunicationController comController;
 	private Student student;
+	private String name;
+	private String id;
+	private Socket socket;
+	private BufferedReader socketIn;
+	private PrintWriter socketOut;
 
-
-
-
-	public GUIController(FrameManager frameManager, CommunicationController comController) {
-
+//	public GUIController(FrameManager frameManager) {
+//		student = new Student();
+//		this.frameManager = frameManager;
+////		this.comController = comController;
+//	}
+	
+	public GUIController(CommunicationController comController, FrameManager frameManager) {
+//		this.socket=socket;
+//		try {
+//			socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//			socketOut = new PrintWriter(socket.getOutputStream(), true);
+//		}catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		student = new Student();
 		this.frameManager = frameManager;
 		this.comController = comController;
+	}
+	
+	public void setComController(CommunicationController comController) {
+		this.comController=comController;
 	}
 
 	public GUIController(FrameManager frameManager, CommunicationController comController, Student student) {
@@ -35,9 +56,28 @@ public class GUIController {
 		this.comController = comController;
 		this.student = student;
 	}
-
+	
+	public void start() {
+		frameManager.start();
+		frameManager.addListenersToLogin(new loginLoginListener());
+	}
+	
+	public class loginLoginListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			name = frameManager.getName();
+			student.setStudentName(name);
+			id = frameManager.getID();
+			student.setStudentId(Integer.parseInt(id));
+			//send name and id over to server to create new student 
+			frameManager.closeLoginWindow();
+			displayMainMenu();
+			
+		}
+	}
 
 	public void displayMainMenu() {
+		frameManager.mainSetStudentInfo(name, id);
 		frameManager.displayMainWindow();
 		frameManager.addListenersToMainMenu(new mainSearchCoursesListener(), new mainMyCoursesListener());
 	}
@@ -50,6 +90,7 @@ public class GUIController {
 	public class mainSearchCoursesListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			frameManager.searchSetStudentInfo(name, id);
 			frameManager.closeMainWindow();
 			frameManager.displaySearchWindow();
 			frameManager.addListenersToSearchWindow(new searchSearchListener(), new searchViewAllListener(),
@@ -62,6 +103,7 @@ public class GUIController {
 	public class mainMyCoursesListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			frameManager.myCoursesSetStudentInfo(name,id);
 			frameManager.closeMainWindow();
 			frameManager.displayMyCoursesWindow();
 			frameManager.addListenersToMyCourseWindow(new myCourseAddCourseListener(), new myCourseDropCourseListener(),
@@ -105,17 +147,19 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String[] course = frameManager.getCourseFromSearch(); //gets user input for course to search
-			String courseName = course[0];
-			int courseNum = Integer.parseInt(course[1]);
+//			String courseName = course[0];
+//			int courseNum = Integer.parseInt(course[1]);
+			System.out.println("Got here G");
+			comController.communicateWithServer("1 "+course[0]+" "+course[1]+"\0");
+			String response;
+			response = comController.communicate();
+			if (response.equals("Sorry, course not found")) {
+				frameManager.sendMessagetoSearchWindow(response);
+			}
+			else {
+				frameManager.sendMessagetoSearchWindow(response);
+			}
 			
-			
-//			if (toSearch!=null) {
-//				frameManager.sendMessagetoSearchWindow(
-//						"Course Found! Course Information is as follows:\n" + course[0] + " " + course[1] + "\n");
-//				// *needs to print out an object*
-//			} else {
-//				frameManager.sendMessagetoSearchWindow("Sorry, course not found!");
-//			}
 		}
 	}
 
@@ -138,7 +182,10 @@ public class GUIController {
 
 	}
 	
-
+	public static void main(String args[]) {
+		CommunicationController comM = new CommunicationController ("localhost", 8099);
+		comM.communicate();
+	}
 	
 
 }

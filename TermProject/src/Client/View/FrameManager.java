@@ -2,7 +2,6 @@ package Client.View;
 //
 import java.awt.event.ActionListener;
 
-
 import Client.Model.Student;
 
 
@@ -12,11 +11,17 @@ public class FrameManager {
 	private MainWindow mainWindow;
 	private MyCourseWindow myCourseWindow;
 	private SearchWindow searchWindow;
+	private LoginWindow loginWindow;
 	
-	public FrameManager(MainWindow mainWindow, MyCourseWindow myCourseWindow, SearchWindow searchWindow) {
+	public FrameManager(MainWindow mainWindow, MyCourseWindow myCourseWindow, SearchWindow searchWindow, LoginWindow loginWindow) {
 		this.mainWindow=mainWindow;
 		this.myCourseWindow=myCourseWindow;
 		this.searchWindow=searchWindow;
+		this.loginWindow=loginWindow;
+	}
+	
+	public void start() {
+		loginWindow.setVisible(true);
 	}
 
 	public void displaySearchWindow() {
@@ -27,11 +32,6 @@ public class FrameManager {
 		return searchWindow.getCourse();
 	}
 
-		//MUST BE COMPLETED
-		//checks course in database? returns true if actual course that can be enrolled
-//		public boolean checkCourse(String courseName, int courseNum) {
-//			return false;
-//		}
 
 	public void sendMessagetoSearchWindow(String string) {
 		searchWindow.displayMessage(string);	
@@ -83,6 +83,35 @@ public class FrameManager {
 			ActionListener mainMyCoursesListener) {
 		mainWindow.addCatalogueListener(mainSearchCoursesListener);
 		mainWindow.addMyCoursesListener(mainMyCoursesListener);
+	}
+
+	public String getName() {
+		return loginWindow.getName();
+	}
+
+	public String getID() {
+		return loginWindow.getID();
+	}
+
+	public void addListenersToLogin(ActionListener loginLoginListener) {
+		loginWindow.addLoginListener(loginLoginListener);
+	}
+
+	public void mainSetStudentInfo(String name, String id) {
+		mainWindow.setStudentInfo(name, id);
+	}
+
+	public void searchSetStudentInfo(String name, String id) {
+		searchWindow.setStudentInfo(name, id);
+	}
+
+	public void myCoursesSetStudentInfo(String name, String id) {
+		myCourseWindow.setStudentInfo(name,id);
+	}
+
+	public void closeLoginWindow() {
+		loginWindow.setVisible(false);
+		loginWindow.dispose();
 	}
 
 	

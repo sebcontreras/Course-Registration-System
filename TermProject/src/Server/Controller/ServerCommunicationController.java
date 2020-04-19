@@ -7,7 +7,14 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
 
+import Client.Controller.GUIController;
+import Client.View.FrameManager;
+import Client.View.LoginWindow;
+import Client.View.MainWindow;
+import Client.View.MyCourseWindow;
+import Client.View.SearchWindow;
 import Server.Model.Course;
 import Server.Model.CourseCatalogue;
 import Server.Model.CourseOffering;
@@ -17,35 +24,48 @@ import Server.Model.Student;
 //
 public class ServerCommunicationController {
 
-	private ServerSocket serverSocket;
+//	private ServerSocket serverSocket;
+	private Socket socket;
 	private PrintWriter socketOut;
 	private BufferedReader socketIn;
 	private CourseCatalogue catalogue;
 	private DBController database;
+	private ExecutorService pool;
 	
-	public ServerCommunicationController(String serverName, int portNumber, DBController database) {
+	public ServerCommunicationController(Socket socket, DBController database) {
 		try {
-			serverSocket = new ServerSocket(portNumber);
+			this.socket = socket;
+//			serverSocket = new ServerSocket(portNumber);
+//			socket = serverSocket.accept();
+			socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			socketOut = new PrintWriter(socket.getOutputStream(), true);
 		}catch (IOException e) {
 			e.printStackTrace();
 		} 
 		this.database=database;
 	}
 	
-	public void communicateWithServer() {
+	/**
+	 * 
+	 */
+	public void communicate() {
 		try {
+			
 			while(true) {
 				String read= "";
 				
 				while (true) {
 					read = socketIn.readLine();
+					System.out.println("Got here S");
 					if (read.contains("\0")) {
 						read = read.replace("\0", "");
 						break;
 					}
-					String []input = read.split(" ");
-					decision(input);
+					
 				}
+				System.out.println("Got here");
+				String []input = read.split(" ");
+				decision(input);
 				
 
 			} 
@@ -60,9 +80,6 @@ public class ServerCommunicationController {
 			}
 		}
 	}
-
-	
-	
 	private void decision(String []input) {
 		int choice = Integer.parseInt(input[0]);
 		switch(choice) {
@@ -126,5 +143,13 @@ public class ServerCommunicationController {
 		}
 	}
 
+//	public ServerSocket getServerSocket() {
+//		return serverSocket;
+//	}
 
+//	public static void main(String args[]) {
+//		DBController database = new DBController();
+//		ServerCommunicationController servCom = new ServerCommunicationController(8099, database);
+//		servCom.communicate();
+//	}
 }

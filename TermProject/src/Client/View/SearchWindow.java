@@ -6,7 +6,8 @@ import java.awt.event.ActionListener;
 
 public class SearchWindow extends JFrame implements Standardization{
 	private JLabel titleLabel = new JLabel("Student Registration System");
-	private JLabel studentName, studentID;
+	private JLabel studentName = new JLabel();
+	private JLabel studentID = new JLabel();
 	private JLabel subTitleLabel = new JLabel("Search Window");
 	private JButton searchB = new JButton("Search");
 	private JButton viewB = new JButton("View All Courses");
@@ -31,11 +32,9 @@ public class SearchWindow extends JFrame implements Standardization{
 		viewB.setBackground(Color.white);
 		backB.setFont(buttonFont);
 		backB.setBackground(Color.white);
-		getStudentInfo();
 		north.add(titleLabel);
 		north.add(subTitleLabel);
-		north.add(studentName);
-		north.add(studentID);
+		
 		
 		south.add(searchB);
 		south.add(viewB);
@@ -77,16 +76,13 @@ public class SearchWindow extends JFrame implements Standardization{
 		JOptionPane.showMessageDialog(this, s);
 	}
 	
-	public void getStudentInfo() {
-		//method to get student's name
-		//get student's name from controller?
-		String name = "Name: Student's Name";
-		studentName = new JLabel(name);
+	public void setStudentInfo(String name, String id) {
+		studentName = new JLabel("Welcome, "+name);
 		studentName.setFont(studentFont);
-		//get student's ID from controller?
-		String id = "ID: 000000";
-		studentID = new JLabel(id);
+		studentID = new JLabel("ID: "+id);
 		studentID.setFont(studentFont);
+		north.add(studentName);
+		north.add(studentID);
 	}
 	
 //	public static void main (String []args) {

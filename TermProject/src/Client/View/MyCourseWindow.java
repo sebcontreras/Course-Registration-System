@@ -9,7 +9,8 @@ import javax.swing.*;
 public class MyCourseWindow extends JFrame implements Standardization{
 	private JLabel titleLabel = new JLabel("Student Registration System");
 	private JLabel subTitleLabel = new JLabel("My Courses");
-	private JLabel studentName, studentID;
+	private JLabel studentName = new JLabel();
+	private JLabel studentID = new JLabel();
 	private JButton addB = new JButton("Add Course");
 	private JButton backB = new JButton("Back To Main Menu");
 	private JButton dropB = new JButton("Drop Selected Course");
@@ -19,7 +20,6 @@ public class MyCourseWindow extends JFrame implements Standardization{
 	
 	public MyCourseWindow() {
 		super("My Course Window");
-		getStudentInfo();
 		setSize(500,500);
 		setTitle("My Course Window");
 		setLayout(new BorderLayout());
@@ -36,8 +36,7 @@ public class MyCourseWindow extends JFrame implements Standardization{
 		addB.setBackground(Color.white);
 		north.add(titleLabel);
 		north.add(subTitleLabel);
-		north.add(studentName);
-		north.add(studentID);
+		
 		
 		south.add(addB);
 		south.add(dropB);
@@ -46,18 +45,7 @@ public class MyCourseWindow extends JFrame implements Standardization{
 		add("South", south);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	public void getStudentInfo() {
-		//method to get student's name
-		//get student's name from controller?
-		String name = "Name: Student's Name";
-		studentName = new JLabel(name);
-		studentName.setFont(studentFont);
-		//get student's ID from controller?
-		String id = "ID: 000000";
-		studentID = new JLabel(id);
-		studentID.setFont(studentFont);
-	}
+
 	
 	public void addAddCourseListener(ActionListener listener) {
 		addB.addActionListener(listener);
@@ -88,6 +76,15 @@ public class MyCourseWindow extends JFrame implements Standardization{
 	
 	private void displayMessage(String string) {
 		JOptionPane.showMessageDialog(this, string);
+	}
+
+	public void setStudentInfo(String name, String id) {
+		studentName = new JLabel("Welcome, "+name);
+		studentName.setFont(studentFont);
+		studentID = new JLabel("ID: "+id);
+		studentID.setFont(studentFont);
+		north.add(studentName);
+		north.add(studentID);
 	}
 
 //	public static void main (String []args) {
