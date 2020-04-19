@@ -1,14 +1,10 @@
 package Server.Model;
 
-
-import java.io.PrintWriter;
-import java.io.Serializable;
-import java.io.StringWriter;
 import java.util.ArrayList;
 
 import Server.Model.Registration;
 
-public class Student implements Serializable{
+public class Student {
 
 	private String studentName;
 	private int studentId;

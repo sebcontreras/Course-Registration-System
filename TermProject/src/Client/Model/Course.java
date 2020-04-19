@@ -2,6 +2,9 @@ package Client.Model;
 
 import java.util.ArrayList;
 
+import Client.Model.Course;
+import Client.Model.CourseOffering;
+
 public class Course {
 
 	private String courseName;
@@ -14,6 +17,18 @@ public class Course {
 		this.setCourseNum(courseNum);
 		setPreReq(new ArrayList<Course>());
 		offeringList = new ArrayList<CourseOffering>();
+	}
+	
+	public void addOffering(CourseOffering offering) {
+		if (offering != null && offering.getTheCourse() == null) {
+			offering.setTheCourse(this);
+			if (!offering.getTheCourse().getCourseName().equals(courseName) || offering.getTheCourse().getCourseNum() != courseNum) {
+				System.err.println("Error! This section belongs to another course!");
+				return;
+			}
+			
+			offeringList.add(offering);
+		}
 	}
 
 	public String getCourseName() {
@@ -48,6 +63,22 @@ public class Course {
 			st += c;
 		st += "\n-------\n";
 		return st;
+	}
+	
+	public CourseOffering getCourseOfferingAt(int i) {
+		if (i < 0 || i >= offeringList.size() )
+			return null;
+		else
+			return offeringList.get(i);
+	}
+	
+	public boolean equals(Course comp) {
+		
+		if(this.getCourseName().equals(comp.getCourseName())) {
+			if(this.getCourseNum() == comp.getCourseNum())
+				return true;
+		}
+		return false;
 	}
 }
 
