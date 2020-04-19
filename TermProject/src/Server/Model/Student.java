@@ -1,11 +1,7 @@
 package Server.Model;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+
 import java.io.Serializable;
-import java.net.Socket;
 import java.util.ArrayList;
 
 import Server.Model.Registration;
@@ -15,12 +11,11 @@ public class Student implements Serializable{
 	private String studentName;
 	private int studentId;
 	private ArrayList<Registration> studentRegList;
-	private Socket aSocket;
 	private CourseCatalogue courseList;
+	private int choice;
 	
-	public Student ( Socket s) {
-		courseList = new CourseCatalogue();
-		aSocket = s;
+	public Student () {
+		setCourseList(new CourseCatalogue());
 		studentRegList = new ArrayList<Registration>();
 	}
 	
@@ -102,6 +97,22 @@ public void addRegistration(Registration registration) {
 			str += reg;
 		}
 		return str;
+	}
+
+	public CourseCatalogue getCourseList() {
+		return courseList;
+	}
+
+	public void setCourseList(CourseCatalogue courseList) {
+		this.courseList = courseList;
+	}
+
+	public int getChoice() {
+		return choice;
+	}
+
+	public void setChoice(int choice) {
+		this.choice = choice;
 	}
 }
 
