@@ -22,9 +22,9 @@ import Server.Model.Registration;
 import Server.Model.Student;
 
 //
-public class ServerCommunicationController {
+public class ServerCommunicationController implements Runnable{
 
-//	private ServerSocket serverSocket;
+	private ServerSocket serverSocket;
 	private Socket socket;
 	private PrintWriter socketOut;
 	private BufferedReader socketIn;
@@ -32,22 +32,22 @@ public class ServerCommunicationController {
 	private DBController database;
 	private ExecutorService pool;
 	
-	public ServerCommunicationController(Socket socket, DBController database) {
+	public ServerCommunicationController(Socket socket) {
 		try {
-			this.socket = socket;
-//			serverSocket = new ServerSocket(portNumber);
-//			socket = serverSocket.accept();
+			this.socket=socket;
 			socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			socketOut = new PrintWriter(socket.getOutputStream(), true);
 		}catch (IOException e) {
 			e.printStackTrace();
 		} 
-		this.database=database;
+		database = new DBController();
 	}
 	
-	/**
-	 * 
-	 */
+	@Override
+	public void run() {
+		communicate();
+	}
+	
 	public void communicate() {
 		try {
 			
@@ -56,6 +56,7 @@ public class ServerCommunicationController {
 				
 				while (true) {
 					read = socketIn.readLine();
+					System.out.println(read);
 					System.out.println("Got here S");
 					if (read.contains("\0")) {
 						read = read.replace("\0", "");
@@ -63,8 +64,11 @@ public class ServerCommunicationController {
 					}
 					
 				}
-				System.out.println("Got here");
 				String []input = read.split(" ");
+				System.out.println(input.length);
+				for (int i=0; i<input.length; i++) {
+					System.out.println(input[i]);
+				}
 				decision(input);
 				
 
@@ -80,6 +84,7 @@ public class ServerCommunicationController {
 			}
 		}
 	}
+	
 	private void decision(String []input) {
 		int choice = Integer.parseInt(input[0]);
 		switch(choice) {
@@ -137,19 +142,14 @@ public class ServerCommunicationController {
 	public void searchForCourse(String courseName, String courseNum){
 		String output = database.searchForCourse(courseName, Integer.parseInt(courseNum));
 		if (output==null) {
-			socketOut.println("Sorry, course not found");
+			socketOut.println("Sorry, course not found"+"\0");
 		} else {
-			socketOut.println(output);
+			socketOut.println(output+"\0");
 		}
 	}
 
-//	public ServerSocket getServerSocket() {
-//		return serverSocket;
-//	}
 
-//	public static void main(String args[]) {
-//		DBController database = new DBController();
-//		ServerCommunicationController servCom = new ServerCommunicationController(8099, database);
-//		servCom.communicate();
-//	}
+
+
+
 }

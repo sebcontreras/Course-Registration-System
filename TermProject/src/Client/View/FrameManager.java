@@ -13,11 +13,11 @@ public class FrameManager {
 	private SearchWindow searchWindow;
 	private LoginWindow loginWindow;
 	
-	public FrameManager(MainWindow mainWindow, MyCourseWindow myCourseWindow, SearchWindow searchWindow, LoginWindow loginWindow) {
-		this.mainWindow=mainWindow;
-		this.myCourseWindow=myCourseWindow;
-		this.searchWindow=searchWindow;
-		this.loginWindow=loginWindow;
+	public FrameManager() {
+		mainWindow = new MainWindow();
+		myCourseWindow = new MyCourseWindow();
+		searchWindow = new SearchWindow();
+		loginWindow = new LoginWindow();
 	}
 	
 	public void start() {

@@ -61,7 +61,7 @@ public class SearchWindow extends JFrame implements Standardization{
 		String input ="";
 		String [] course;
 		while (true) {
-			input = JOptionPane.showInputDialog("Please enter the course you would like to add");
+			input = JOptionPane.showInputDialog("Please enter the course you would like to search");
 			course = input.split(" ");
 			if (course[0].length()==4 && course[1].length()==3) {
 				break;

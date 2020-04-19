@@ -24,17 +24,8 @@ public class GUIController {
 	private Student student;
 	private String name;
 	private String id;
-	private Socket socket;
-	private BufferedReader socketIn;
-	private PrintWriter socketOut;
 
-//	public GUIController(FrameManager frameManager) {
-//		student = new Student();
-//		this.frameManager = frameManager;
-////		this.comController = comController;
-//	}
-	
-	public GUIController(CommunicationController comController, FrameManager frameManager) {
+	public GUIController(CommunicationController comController) {
 //		this.socket=socket;
 //		try {
 //			socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -42,20 +33,13 @@ public class GUIController {
 //		}catch (IOException e) {
 //			e.printStackTrace();
 //		}
+//		
 		student = new Student();
-		this.frameManager = frameManager;
+		frameManager = new FrameManager();
 		this.comController = comController;
 	}
 	
-	public void setComController(CommunicationController comController) {
-		this.comController=comController;
-	}
 
-	public GUIController(FrameManager frameManager, CommunicationController comController, Student student) {
-		this.frameManager = frameManager;
-		this.comController = comController;
-		this.student = student;
-	}
 	
 	public void start() {
 		frameManager.start();
@@ -147,12 +131,10 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String[] course = frameManager.getCourseFromSearch(); //gets user input for course to search
-//			String courseName = course[0];
-//			int courseNum = Integer.parseInt(course[1]);
-			System.out.println("Got here G");
-			comController.communicateWithServer("1 "+course[0]+" "+course[1]+"\0");
-			String response;
-			response = comController.communicate();
+			String courseName = course[0];
+			int courseNum = Integer.parseInt(course[1]);
+			String response = comController.communicate("1 "+course[0]+" "+course[1]+"\0");
+			System.out.println(response+"GOT HERE");
 			if (response.equals("Sorry, course not found")) {
 				frameManager.sendMessagetoSearchWindow(response);
 			}
@@ -183,8 +165,8 @@ public class GUIController {
 	}
 	
 	public static void main(String args[]) {
-		CommunicationController comM = new CommunicationController ("localhost", 8099);
-		comM.communicate();
+		GUIController controller = new GUIController(new CommunicationController("localhost", 8099));
+		controller.start();
 	}
 	
 

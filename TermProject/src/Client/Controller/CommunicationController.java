@@ -10,6 +10,7 @@ import java.net.Socket;
 
 
 import Client.Model.*;
+import Client.View.*;
 import Server.Controller.DBController;
 import Server.Controller.ServerCommunicationController;
 
@@ -31,11 +32,12 @@ public class CommunicationController {
 		}
 	}
 	
-	public String communicate () {
+	public String communicate (String line) {
+		socketOut.println(line);
 		String response = null;
 		while (true) {
 			try {
-				response = socketIn.readLine();
+				response = response+socketIn.readLine()+"\n";
 			}catch(IOException e) {
 				e.printStackTrace();
 			}
@@ -47,11 +49,8 @@ public class CommunicationController {
 		return response;
 	}
 	
-	public void communicateWithServer(String line) {
-		socketOut.print(line);
-	}
 	
-	
+
 	
 	
 
