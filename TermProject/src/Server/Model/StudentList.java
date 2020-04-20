@@ -39,6 +39,7 @@ public class StudentList {
 		Student tar = findStudent(id);
 		
 		if(tar != null) {
+
 			if(tar.checkCourse(co)) {
 				return "Sorry! You are already registered in this course.";
 			}else if(tar.getNumberOfRegistrations()>5) {
@@ -47,6 +48,7 @@ public class StudentList {
 				Registration r = new Registration(tar, co);
 				return "Registration successful!";
 			}
+
 			
 		}
 		return null;

@@ -1,24 +1,105 @@
 package Server.Model;
 
+import java.sql.*;
 import java.util.ArrayList;
 
-public class DBManager {
+public class DBManager implements IDBCredentials{
 	
-	ArrayList <Course> courseList;
-	ArrayList <Student> studentList;
+	private Connection conn;
+	private Statement stmt;
+	private ResultSet rs;
+	
+	private ArrayList <Course> courseList;
+	private ArrayList <Student> studentList;
 
 	public DBManager () {
 		courseList = new ArrayList<Course>();
 		studentList = new ArrayList<Student>();
 	}
 	
+	//needs to be called
+	public void initializeConnection() {
+		try {
+			Driver driver = new com.mysql.cj.jdbc.Driver();
+			DriverManager.registerDriver(driver);
+			conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+		}catch(SQLException e) {
+			System.out.println("Problem, not connected");
+			e.printStackTrace();
+		}
+	}
+	
+	public void close() {
+		try {
+			stmt.close();
+			rs.close();
+			conn.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<Course> readCourseFromDataBase() {
+		String query = "SELECT * FROM termproject.courses where name= ? and number= ?";
+		PreparedStatement pStat = null;
+		try {
+			pStat = conn.prepareStatement(query);
+			rs = pStat.executeQuery(query);
+			while(rs.next()) {
+				//int id = rs.getInt("id");
+				String name = rs.getString("name");
+				int num = rs.getInt("number");
+				//should we have id?
+				courseList.add(new Course(name, num));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (pStat != null)
+				try {
+					pStat.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		addOfferings();
+		
+		return courseList;
+	}
+	
+	public ArrayList<Student> readStudentFromDataBase() {
+		String query = "SELECT * FROM termproject.student where id= ? and first= ? and last= ?";
+		PreparedStatement pStat = null;
+		try {
+			pStat = conn.prepareStatement(query);
+			rs = pStat.executeQuery(query);
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String first = rs.getString("first");
+				String last = rs.getString("last");
+				//should we pass in the other lists
+				studentList.add(new Student(first+" "+last, id));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (pStat != null)
+				try {
+					pStat.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		
+		
+		return studentList;
+	}
+	
+	/**public ArrayList<Course> readCourseFromDataBase() {
 		courseList.add(new Course ("ENGG", 200));
 		courseList.add(new Course ("MATH", 275));
 		courseList.add(new Course ("MATH", 211));
 		courseList.add(new Course ("ENGG", 233));
-		courseList.add(new Course ("ENGG", 201));
-		courseList.add(new Course ("ENGG", 225));
 		courseList.add(new Course ("GRST", 211));
 		courseList.add(new Course ("GRST", 209));
 		courseList.add(new Course ("MATH", 271));
@@ -36,7 +117,8 @@ public class DBManager {
 		
 		return courseList;
 	}
-	
+	*/
+	/**
 	public ArrayList<Student> readStudentFromDataBase() {
 		studentList.add(new Student("Mikey", 100));
 		studentList.add(new Student("Dave", 101));
@@ -83,6 +165,7 @@ public class DBManager {
 		
 		return studentList;
 	}
+	*/
 	
 	private void addOfferings() {
 		int index = 0;

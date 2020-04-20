@@ -123,7 +123,9 @@ public class ServerCommunicationController implements Runnable{
 	}
 
 	public void removeCourseFromStudent(String courseName, String courseNum, String ID) {
+
 		Course course = database.searchCat(courseName, Integer.parseInt(courseNum));
+
 		if (course==null) {
 			socketOut.println("Course does not exist\0");
 			return;
@@ -135,8 +137,10 @@ public class ServerCommunicationController implements Runnable{
 	}
 
 	public void addCourseToStudent(String courseName, String courseNum, String ID) {
+
 		Course course = database.searchCat(courseName, Integer.parseInt(courseNum));
 		
+
 		if (course==null) {
 			socketOut.println("Course does not exist\0");
 			return;

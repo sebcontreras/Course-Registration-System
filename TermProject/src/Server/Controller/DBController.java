@@ -1,7 +1,5 @@
 package Server.Controller;
 
-import java.util.ArrayList;
-
 import Server.Model.*;
 
 
@@ -14,6 +12,11 @@ public class DBController {
 	public DBController(){
 		studentList = new StudentList();
 		courseCatalogue = new CourseCatalogue();
+		
+	}
+	
+	public CourseCatalogue getCourseCatalogue() {
+		return this.courseCatalogue;
 	}
 	
 	public String getAllCourses() {
