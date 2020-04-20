@@ -36,7 +36,8 @@ public class StudentList {
 		
 		if(tar != null) {
 			
-			Registration r = new Registration(tar, co);
+			Registration r = new Registration();
+			r.completeRegistration(tar, co);
 			
 		}
 	}

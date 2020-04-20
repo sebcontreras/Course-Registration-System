@@ -28,7 +28,6 @@ public class ServerCommunicationController {
 	private Socket socket;
 	private PrintWriter socketOut;
 	private BufferedReader socketIn;
-	private CourseCatalogue catalogue;
 	private DBController database;
 	private ExecutorService pool;
 	
@@ -110,7 +109,7 @@ public class ServerCommunicationController {
 	}
 
 	public void removeCourseFromStudent(String courseName, String courseNum, String ID) {
-		Course course = catalogue.searchCat(courseName, Integer.parseInt(courseNum));
+		Course course = database.getCourseCatalogue().searchCat(courseName, Integer.parseInt(courseNum));
 		if (course==null) {
 			socketOut.println("Course does not exist");
 			return;
@@ -123,7 +122,7 @@ public class ServerCommunicationController {
 
 	public void addCourseToStudent(String courseName, String courseNum, String ID) {
 	
-		Course course = catalogue.searchCat(courseName, Integer.parseInt(courseNum));
+		Course course = database.getCourseCatalogue().searchCat(courseName, Integer.parseInt(courseNum));
 		if (course==null) {
 			socketOut.println("Course does not exist");
 			return;
