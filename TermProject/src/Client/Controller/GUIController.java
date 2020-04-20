@@ -3,18 +3,7 @@ package Client.Controller;
 //
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.util.ArrayList;
 
-import javax.swing.JLabel;
-
-import Client.Model.Course;
 import Client.Model.Student;
 import Client.View.FrameManager;
 
