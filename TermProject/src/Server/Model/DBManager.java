@@ -16,6 +16,7 @@ public class DBManager implements IDBCredentials{
 	public DBManager () {
 		courseList = new ArrayList<Course>();
 		studentList = new ArrayList<Student>();
+		initializeConnection();
 	}
 	
 	//needs to be called
@@ -95,78 +96,6 @@ public class DBManager implements IDBCredentials{
 		
 		return studentList;
 	}
-	
-	/**public ArrayList<Course> readCourseFromDataBase() {
-		courseList.add(new Course ("ENGG", 200));
-		courseList.add(new Course ("MATH", 275));
-		courseList.add(new Course ("MATH", 211));
-		courseList.add(new Course ("ENGG", 233));
-		courseList.add(new Course ("GRST", 211));
-		courseList.add(new Course ("GRST", 209));
-		courseList.add(new Course ("MATH", 271));
-		courseList.add(new Course ("MATH", 277));
-		courseList.add(new Course ("ENGG", 201));
-		courseList.add(new Course ("ENGG", 225));
-		courseList.add(new Course ("ENGG", 319));
-		courseList.add(new Course ("ENGG", 209));
-		courseList.add(new Course ("COMS", 311));
-		courseList.add(new Course ("MATH", 375));
-		courseList.add(new Course ("PHYS", 269));
-		courseList.add(new Course ("PHYS", 369));
-		
-		addOfferings();
-		
-		return courseList;
-	}
-	*/
-	/**
-	public ArrayList<Student> readStudentFromDataBase() {
-		studentList.add(new Student("Mikey", 100));
-		studentList.add(new Student("Dave", 101));
-		studentList.add(new Student("Tom", 102));
-		studentList.add(new Student("Sam", 103));
-		studentList.add(new Student("Kate", 104));
-		studentList.add(new Student("Emma", 105));
-		studentList.add(new Student("Tim", 106));
-		studentList.add(new Student("Cris", 107));
-		studentList.add(new Student("Vladimir", 108));
-		studentList.add(new Student("Vic", 109));
-		studentList.add(new Student("Aby", 110));
-		studentList.add(new Student("Des", 111));
-		studentList.add(new Student("Hunter", 112));
-		studentList.add(new Student("Ben", 113));
-		studentList.add(new Student("Jon", 114));
-		studentList.add(new Student("Ee", 115));
-		studentList.add(new Student("Hannah", 116));
-		studentList.add(new Student("Julia", 117));
-		studentList.add(new Student("Perez", 118));
-		studentList.add(new Student("Arthur", 119));
-		studentList.add(new Student("George", 120));
-		studentList.add(new Student("Seb", 121));
-		studentList.add(new Student("Adi", 122));
-		studentList.add(new Student("Clair", 123));
-		studentList.add(new Student("Bob", 124));
-		studentList.add(new Student("Don", 125));
-		studentList.add(new Student("Ron", 126));
-		studentList.add(new Student("Harry", 127));
-		studentList.add(new Student("Jake", 128));
-		studentList.add(new Student("Ryan", 129));
-		studentList.add(new Student("Keven", 130));
-		studentList.add(new Student("Oscar", 131));
-		studentList.add(new Student("Pam", 132));
-		studentList.add(new Student("Angela", 133));
-		studentList.add(new Student("Creed", 134));
-		studentList.add(new Student("Autin", 135));
-		studentList.add(new Student("Ethan", 136));
-		studentList.add(new Student("Noah", 137));
-		studentList.add(new Student("Andy", 138));
-		studentList.add(new Student("Jadon", 139));
-		studentList.add(new Student("Stanley", 140));
-		
-		
-		return studentList;
-	}
-	*/
 	
 	private void addOfferings() {
 		int index = 0;
