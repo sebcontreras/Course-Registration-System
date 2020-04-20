@@ -17,8 +17,6 @@ public class DBManager {
 		courseList.add(new Course ("MATH", 275));
 		courseList.add(new Course ("MATH", 211));
 		courseList.add(new Course ("ENGG", 233));
-		courseList.add(new Course ("ENGG", 201));
-		courseList.add(new Course ("ENGG", 225));
 		courseList.add(new Course ("GRST", 211));
 		courseList.add(new Course ("GRST", 209));
 		courseList.add(new Course ("MATH", 271));

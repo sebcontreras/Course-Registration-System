@@ -12,6 +12,7 @@ public class DBController {
 	public DBController(){
 		studentList = new StudentList();
 		courseCatalogue = new CourseCatalogue();
+		
 	}
 	
 	public CourseCatalogue getCourseCatalogue() {
