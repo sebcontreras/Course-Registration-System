@@ -43,10 +43,9 @@ public class Registration {
 	
 	@Override
 	public String toString () {
-		String st = getTheOffering()+"";
-//		st += "The Offering: " + getTheOffering () + "\n";
-//		st += "Grade: " + getGrade();
-//		st += "\n-----------\n";
+		String st = getTheOffering () + "";
+		st += "Grade: " + getGrade();
+		st += "\n-----------\n";
 		return st;
 		
 	}

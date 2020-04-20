@@ -74,10 +74,6 @@ public class MainWindow extends JFrame implements Standardization{
 		JOptionPane.showMessageDialog(this, communicate);
 	}
 	
-//	public static void main (String []args) {
-//		MainWindow main = new MainWindow();
-//		main.setVisible(true);
-//	}
 
 	
 }

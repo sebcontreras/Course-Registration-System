@@ -4,19 +4,16 @@ package Client.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Client.Model.Student;
 import Client.View.FrameManager;
 
 public class GUIController {
 	private FrameManager frameManager;
 	private CommunicationController comController;
-	private Student student;
 	private String name;
 	private String id;
 
 	public GUIController(CommunicationController comController) {
 
-		student = new Student();
 		frameManager = new FrameManager();
 		this.comController = comController;
 	}
@@ -39,9 +36,7 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			name = frameManager.getName();
-			student.setStudentName(name);
 			id = frameManager.getID();
-			student.setStudentId(Integer.parseInt(id));
 			frameManager.closeLoginWindow();
 			frameManager.sendMessagetoMainWindow(comController.communicate("7 "+name+" "+id+" \0"));
 			displayMainMenu();
@@ -55,9 +50,6 @@ public class GUIController {
 		frameManager.addListenersToMainMenu(new mainSearchCoursesListener(), new mainMyCoursesListener(), new quitListener());
 	}
 
-	public Student getStudent() {
-		return student;
-	}
 
 	// listener for "Search Courses" button in main
 	public class mainSearchCoursesListener implements ActionListener {

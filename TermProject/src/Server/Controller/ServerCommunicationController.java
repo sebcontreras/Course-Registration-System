@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
 
 
 import Server.Model.Course;
@@ -14,22 +13,18 @@ import Server.Model.Course;
 //
 public class ServerCommunicationController implements Runnable{
 
-	private ServerSocket serverSocket;
-	private Socket socket;
 	private PrintWriter socketOut;
 	private BufferedReader socketIn;
 	private DBController database;
-	private ExecutorService pool;
 	
-	public ServerCommunicationController(Socket socket) {
+	public ServerCommunicationController(Socket socket, DBController database) {
 		try {
-			this.socket=socket;
 			socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			socketOut = new PrintWriter(socket.getOutputStream(), true);
 		}catch (IOException e) {
 			e.printStackTrace();
 		} 
-		database = new DBController();
+		this.database =database;
 	}
 	
 	@Override
@@ -113,7 +108,7 @@ public class ServerCommunicationController implements Runnable{
 	}
 
 	public void removeCourseFromStudent(String courseName, String courseNum, String ID) {
-
+		courseName = courseName.toUpperCase();
 		Course course = database.searchCat(courseName, Integer.parseInt(courseNum));
 
 		if (course==null) {
@@ -127,7 +122,7 @@ public class ServerCommunicationController implements Runnable{
 	}
 
 	public void addCourseToStudent(String courseName, String courseNum, String ID) {
-
+		courseName = courseName.toUpperCase();
 		Course course = database.searchCat(courseName, Integer.parseInt(courseNum));
 		
 

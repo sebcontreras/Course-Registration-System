@@ -78,12 +78,5 @@ public class StudentList {
 		return str;
 	}
 	
-	public void listStudents() {
-		System.out.println("The students are:");
-		System.out.println("---------------------------------------");
-		for(Student i : studentList) {
-			System.out.println(i);
-		}
-		System.out.println("---------------------------------------");
-		}
+
 }

@@ -25,9 +25,12 @@ public class Server {
 	
 	public void start() {
 		try {
-			ServerCommunicationController serverCom= new ServerCommunicationController(serverSocket.accept());
-			System.out.println("New client connected...");
-			pool.execute(serverCom);
+			DBController database = new DBController();
+			while (true) {
+				ServerCommunicationController serverCom= new ServerCommunicationController(serverSocket.accept(), database);
+				System.out.println("New client connected...");
+				pool.execute(serverCom);
+			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
