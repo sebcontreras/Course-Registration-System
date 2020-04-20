@@ -42,7 +42,7 @@ public class DBManager implements IDBCredentials{
 	}
 	
 	public ArrayList<Course> readCourseFromDataBase() {
-		String query = "SELECT * FROM termproject.courses where name= ? and number= ?";
+		String query = "SELECT * FROM COURSES";
 		PreparedStatement pStat = null;
 		try {
 			pStat = conn.prepareStatement(query);
@@ -70,7 +70,7 @@ public class DBManager implements IDBCredentials{
 	}
 	
 	public ArrayList<Student> readStudentFromDataBase() {
-		String query = "SELECT * FROM termproject.student where id= ? and first= ? and last= ?";
+		String query = "SELECT * FROM STUDENT";
 		PreparedStatement pStat = null;
 		try {
 			pStat = conn.prepareStatement(query);

@@ -45,7 +45,8 @@ public class StudentList {
 			}else if(tar.getNumberOfRegistrations()>5) {
 				return "Sorry! You are only allowed to register for a maximum of 6 courses.";
 			}else {
-				Registration r = new Registration(tar, co);
+				Registration r = new Registration();
+				r.completeRegistration(tar, co);
 				return "Registration successful!";
 			}
 

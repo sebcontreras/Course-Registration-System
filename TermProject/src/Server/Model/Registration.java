@@ -6,8 +6,7 @@ public class Registration {
 	private CourseOffering theOffering;
 	private char grade;
 	
-	public Registration(Student st, CourseOffering of) {
-		completeRegistration(st, of);
+	public Registration() {
 		grade = '-';
 	}
 	
