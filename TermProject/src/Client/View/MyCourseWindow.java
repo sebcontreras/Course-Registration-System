@@ -13,10 +13,14 @@ public class MyCourseWindow extends JFrame implements Standardization{
 	private JLabel studentID = new JLabel();
 	private JButton addB = new JButton("Add Course");
 	private JButton backB = new JButton("Back To Main Menu");
-	private JButton dropB = new JButton("Drop Selected Course");
+	private JButton dropB = new JButton("Drop Course");
+	private JButton quitB = new JButton("Quit");
+	private JTextArea courses = new JTextArea();
+	private JScrollPane scroller = new JScrollPane(courses);
 	private JPanel north = new JPanel();
 	private JPanel center = new JPanel();
 	private JPanel south = new JPanel();
+	private boolean addedName = false;
 	
 	public MyCourseWindow() {
 		super("My Course Window");
@@ -34,15 +38,22 @@ public class MyCourseWindow extends JFrame implements Standardization{
 		dropB.setBackground(Color.white);
 		addB.setFont(buttonFont);
 		addB.setBackground(Color.white);
+		quitB.setFont(buttonFont);
+		quitB.setBackground(Color.white);
 		north.add(titleLabel);
 		north.add(subTitleLabel);
 		
+		courses.setEditable(false);
+		courses.setFont(standardFont);
+		scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		south.add(addB);
 		south.add(dropB);
 		south.add(backB);
+		south.add(quitB);
 		add("North", north);
 		add("South", south);
+		add("Center", scroller);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -57,6 +68,10 @@ public class MyCourseWindow extends JFrame implements Standardization{
 	
 	public void addReturnListener(ActionListener listener) {
 		backB.addActionListener(listener);
+	}
+	
+	public void addQuitListener(ActionListener listener) {
+		quitB.addActionListener(listener);
 	}
 	
 	public String [] getCourse() {
@@ -74,17 +89,39 @@ public class MyCourseWindow extends JFrame implements Standardization{
 		return course;
 	}
 	
-	private void displayMessage(String string) {
+	public String [] getCourseToRemove() {
+		String input ="";
+		String [] course;
+		while (true) {
+			input = JOptionPane.showInputDialog("Please enter the course you would like to remove");
+			course = input.split(" ");
+			if (course[0].length()==4 && course[1].length()==3) {
+				break;
+			}
+			displayMessage("Error. Invalid format. Enter your choice as a 4-letter word followed by the 3-digit number.");
+		}
+		
+		return course;
+	}
+	
+	public void displayMessage(String string) {
 		JOptionPane.showMessageDialog(this, string);
+	}
+	
+	public void setCourses(String string) {
+		courses.setText("REGISTERED COURSES:\n"+string);
 	}
 
 	public void setStudentInfo(String name, String id) {
-		studentName = new JLabel("Welcome, "+name);
-		studentName.setFont(studentFont);
-		studentID = new JLabel("ID: "+id);
-		studentID.setFont(studentFont);
-		north.add(studentName);
-		north.add(studentID);
+		if (!addedName) {
+			studentName = new JLabel("Welcome, "+name);
+			studentName.setFont(studentFont);
+			studentID = new JLabel("ID: "+id);
+			studentID.setFont(studentFont);
+			north.add(studentName);
+			north.add(studentID);
+			addedName =true;
+		}
 	}
 
 //	public static void main (String []args) {

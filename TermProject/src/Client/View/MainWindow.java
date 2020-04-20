@@ -11,9 +11,11 @@ public class MainWindow extends JFrame implements Standardization{
 	private JLabel subTitleLabel = new JLabel("Main Window");
 	private JButton catalogueB = new JButton("Search Courses");
 	private JButton myCoursesB = new JButton("My Courses");
+	private JButton quitB = new JButton("Quit");
 	private JPanel north = new JPanel();
 	private JPanel center = new JPanel();
 	private JPanel south = new JPanel();
+	private boolean addedName = false;
 
 	public MainWindow() {
 		super("Main Window");
@@ -29,10 +31,13 @@ public class MainWindow extends JFrame implements Standardization{
 		catalogueB.setBackground(Color.white);
 		myCoursesB.setFont(buttonFont);
 		myCoursesB.setBackground(Color.white);
+		quitB.setFont(buttonFont);
+		quitB.setBackground(Color.white);
 		north.add(titleLabel);
 		north.add(subTitleLabel);
 		south.add(catalogueB);
 		south.add(myCoursesB);
+		south.add(quitB);
 		
 		add("North", north);
 		add("South", south);
@@ -47,14 +52,27 @@ public class MainWindow extends JFrame implements Standardization{
 		myCoursesB.addActionListener(listener);
 	}
 	
+	public void addQuitListener(ActionListener listener) {
+		quitB.addActionListener(listener);
+	}
+	
 	
 	public void setStudentInfo(String name, String id) {
-		studentName = new JLabel("Welcome, "+name);
-		studentName.setFont(studentFont);
-		studentID = new JLabel("ID: "+id);
-		studentID.setFont(studentFont);
-		north.add(studentName);
-		north.add(studentID);
+		if (!addedName) {
+			studentName = new JLabel("Welcome, "+name);
+			studentName.setFont(studentFont);
+			studentID = new JLabel("ID: "+id);
+			studentID.setFont(studentFont);
+			north.add(studentName);
+			north.add(studentID);
+			addedName =true;
+		}
+		
+		
+	}
+
+	public void sendMessage(String communicate) {
+		JOptionPane.showMessageDialog(this, communicate);
 	}
 	
 //	public static void main (String []args) {

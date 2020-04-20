@@ -34,7 +34,7 @@ public class CommunicationController {
 	
 	public String communicate (String line) {
 		socketOut.println(line);
-		String response = null;
+		String response = "";
 		while (true) {
 			try {
 				response = response+socketIn.readLine()+"\n";

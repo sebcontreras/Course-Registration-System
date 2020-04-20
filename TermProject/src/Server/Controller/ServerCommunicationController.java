@@ -28,7 +28,6 @@ public class ServerCommunicationController implements Runnable{
 	private Socket socket;
 	private PrintWriter socketOut;
 	private BufferedReader socketIn;
-	private CourseCatalogue catalogue;
 	private DBController database;
 	private ExecutorService pool;
 	
@@ -56,8 +55,6 @@ public class ServerCommunicationController implements Runnable{
 				
 				while (true) {
 					read = socketIn.readLine();
-					System.out.println(read);
-					System.out.println("Got here S");
 					if (read.contains("\0")) {
 						read = read.replace("\0", "");
 						break;
@@ -65,10 +62,6 @@ public class ServerCommunicationController implements Runnable{
 					
 				}
 				String []input = read.split(" ");
-				System.out.println(input.length);
-				for (int i=0; i<input.length; i++) {
-					System.out.println(input[i]);
-				}
 				decision(input);
 				
 
@@ -103,39 +96,54 @@ public class ServerCommunicationController implements Runnable{
 			case 6:
 				viewStudentCourse(input[1]);
 				break;
+			case 7:
+				checkStudentInDatabase(input[1], input[2]);
 		}
 	}
 	
+	private void checkStudentInDatabase(String studentName, String studentID) {
+		if(!database.findStudent(Integer.parseInt(studentID))) {
+			database.addStudentToList(studentName, Integer.parseInt(studentID));
+		}
+		socketOut.println("Login successful.\0");
+	}
+
 	public void viewAllCourses() {
-		socketOut.println(database.getAllCourses());
+		socketOut.println(database.getAllCourses()+"\0");
 	}
 	
 	public void viewStudentCourse(String ID) {
-		socketOut.println(database.viewStudentCourses(Integer.parseInt(ID)));
+		if (database.checkStudentCourseCount(Integer.parseInt(ID))==0) {
+			socketOut.println("You are not yet registered for any courses. \0");
+		}
+		else {
+			socketOut.println(database.viewStudentCourses(Integer.parseInt(ID))+"\0");
+		}
+	
 	}
 
 	public void removeCourseFromStudent(String courseName, String courseNum, String ID) {
-		Course course = catalogue.searchCat(courseName, Integer.parseInt(courseNum));
+		Course course = database.searchCat(courseName, Integer.parseInt(courseNum));
 		if (course==null) {
-			socketOut.println("Course does not exist");
+			socketOut.println("Course does not exist\0");
 			return;
 		}
 		else {
 			String response = database.removeStudentFromCourse(course, Integer.parseInt(ID));
-			socketOut.println(response);
+			socketOut.println(response+"\0");
 		}
 	}
 
 	public void addCourseToStudent(String courseName, String courseNum, String ID) {
-	
-		Course course = catalogue.searchCat(courseName, Integer.parseInt(courseNum));
+		Course course = database.searchCat(courseName, Integer.parseInt(courseNum));
+		
 		if (course==null) {
-			socketOut.println("Course does not exist");
+			socketOut.println("Course does not exist\0");
 			return;
 		}
 		else {
 			String response = database.addStudentToCourse(course, Integer.parseInt(ID));
-			socketOut.println(response);
+				socketOut.println(response+"\0");
 		}
 	}
 

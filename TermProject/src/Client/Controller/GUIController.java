@@ -46,6 +46,13 @@ public class GUIController {
 		frameManager.addListenersToLogin(new loginLoginListener());
 	}
 	
+	public class quitListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+	}
+	
 	public class loginLoginListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -53,8 +60,8 @@ public class GUIController {
 			student.setStudentName(name);
 			id = frameManager.getID();
 			student.setStudentId(Integer.parseInt(id));
-			//send name and id over to server to create new student 
 			frameManager.closeLoginWindow();
+			frameManager.sendMessagetoMainWindow(comController.communicate("7 "+name+" "+id+" \0"));
 			displayMainMenu();
 			
 		}
@@ -63,7 +70,7 @@ public class GUIController {
 	public void displayMainMenu() {
 		frameManager.mainSetStudentInfo(name, id);
 		frameManager.displayMainWindow();
-		frameManager.addListenersToMainMenu(new mainSearchCoursesListener(), new mainMyCoursesListener());
+		frameManager.addListenersToMainMenu(new mainSearchCoursesListener(), new mainMyCoursesListener(), new quitListener());
 	}
 
 	public Student getStudent() {
@@ -78,7 +85,7 @@ public class GUIController {
 			frameManager.closeMainWindow();
 			frameManager.displaySearchWindow();
 			frameManager.addListenersToSearchWindow(new searchSearchListener(), new searchViewAllListener(),
-					new searchBackListener());
+					new searchBackListener(), new quitListener());
 		}
 
 	}
@@ -89,9 +96,10 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			frameManager.myCoursesSetStudentInfo(name,id);
 			frameManager.closeMainWindow();
+			frameManager.setAllStudentCourses(comController.communicate("6 "+id+" \0"));
 			frameManager.displayMyCoursesWindow();
 			frameManager.addListenersToMyCourseWindow(new myCourseAddCourseListener(), new myCourseDropCourseListener(),
-					new myCourseReturnListener());
+					new myCourseReturnListener(), new quitListener());
 
 		}
 	}
@@ -101,8 +109,8 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String [] course = frameManager.getCourseFromMyCourse(); 
-			String courseName = course[0]; 
-			int courseNum = Integer.parseInt(course[1]);
+			frameManager.sendMessagetoMyCourseWindow(comController.communicate("3 "+course[0]+" "+course[1]+" "+id+" "+"\0"));
+			frameManager.setAllStudentCourses(comController.communicate("6 "+id+" \0"));
 			
 			
 			 
@@ -113,7 +121,9 @@ public class GUIController {
 	public class myCourseDropCourseListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
+			String [] course = frameManager.getCourseToRemoveFromMyCourse();
+			frameManager.sendMessagetoMyCourseWindow(comController.communicate("4 "+course[0]+" "+course[1]+" "+id+" "+"\0"));
+			frameManager.setAllStudentCourses(comController.communicate("6 "+id+" \0"));
 		}
 	}
 
@@ -131,10 +141,7 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String[] course = frameManager.getCourseFromSearch(); //gets user input for course to search
-			String courseName = course[0];
-			int courseNum = Integer.parseInt(course[1]);
 			String response = comController.communicate("1 "+course[0]+" "+course[1]+"\0");
-			System.out.println(response+"GOT HERE");
 			if (response.equals("Sorry, course not found")) {
 				frameManager.sendMessagetoSearchWindow(response);
 			}
@@ -149,7 +156,7 @@ public class GUIController {
 	public class searchViewAllListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// display all courses in info text area
+			frameManager.setAllCourses(comController.communicate("2 \0"));
 
 		}
 	}

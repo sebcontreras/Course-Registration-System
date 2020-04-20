@@ -53,10 +53,12 @@ public class FrameManager {
 	}
 
 	public void addListenersToSearchWindow(ActionListener searchSearchListener,
-			ActionListener searchViewAllListener, ActionListener searchBackListener) {
+			ActionListener searchViewAllListener, ActionListener searchBackListener, ActionListener
+			quitListener) {
 		searchWindow.addSearchListener(searchSearchListener);
 		searchWindow.addViewListener(searchViewAllListener);
 		searchWindow.addBackListener(searchBackListener);
+		searchWindow.addQuitListener(quitListener);
 	}
 
 	public void displayMyCoursesWindow() {
@@ -68,10 +70,12 @@ public class FrameManager {
 	}
 
 	public void addListenersToMyCourseWindow(ActionListener myCourseAddCourseListener,
-			ActionListener myCourseDropCourseListener, ActionListener myCourseReturnListener) {
+			ActionListener myCourseDropCourseListener, ActionListener myCourseReturnListener,
+			ActionListener quitListener) {
 		myCourseWindow.addAddCourseListener(myCourseAddCourseListener);
 		myCourseWindow.addDropCourseListener(myCourseDropCourseListener);
 		myCourseWindow.addReturnListener(myCourseReturnListener);
+		myCourseWindow.addQuitListener(quitListener);
 	}
 
 	public void closeMyCourseWindow() {
@@ -80,9 +84,10 @@ public class FrameManager {
 	}
 
 	public void addListenersToMainMenu(ActionListener mainSearchCoursesListener,
-			ActionListener mainMyCoursesListener) {
+			ActionListener mainMyCoursesListener, ActionListener quitListener) {
 		mainWindow.addCatalogueListener(mainSearchCoursesListener);
 		mainWindow.addMyCoursesListener(mainMyCoursesListener);
+		mainWindow.addQuitListener(quitListener);
 	}
 
 	public String getName() {
@@ -112,6 +117,28 @@ public class FrameManager {
 	public void closeLoginWindow() {
 		loginWindow.setVisible(false);
 		loginWindow.dispose();
+	}
+
+	public void setAllCourses(String string) {
+		searchWindow.viewAllCourses(string);
+	}
+
+	public void sendMessagetoMyCourseWindow(String string) {
+		myCourseWindow.displayMessage(string);
+	}
+
+	public String[] getCourseToRemoveFromMyCourse() {
+		return myCourseWindow.getCourseToRemove();
+	}
+
+	public void setAllStudentCourses(String string) {
+		myCourseWindow.setCourses(string);
+		
+	}
+
+	public void sendMessagetoMainWindow(String communicate) {
+		mainWindow.sendMessage(communicate);
+		
 	}
 
 	

@@ -16,6 +16,10 @@ public class StudentList {
 		
 	}
 	
+	public void addStudent(String name, int id) {
+		studentList.add(new Student(name, id));
+	}
+	
 	public void setStudentList(ArrayList <Student> studentList) {
 		this.studentList = studentList;
 	}
@@ -30,15 +34,22 @@ public class StudentList {
 		return null;
 	}
 	
-	public void registerStudent(int id, CourseOffering co) {
+	public String registerStudent(int id, CourseOffering co) {
 		
 		Student tar = findStudent(id);
 		
 		if(tar != null) {
-			
-			Registration r = new Registration(tar, co);
+			if(tar.checkCourse(co)) {
+				return "Sorry! You are already registered in this course.";
+			}else if(tar.getNumberOfRegistrations()>5) {
+				return "Sorry! You are only allowed to register for a maximum of 6 courses.";
+			}else {
+				Registration r = new Registration(tar, co);
+				return "Registration successful!";
+			}
 			
 		}
+		return null;
 	}
 	
 	public boolean removeCourseReg(int id, Course course) {

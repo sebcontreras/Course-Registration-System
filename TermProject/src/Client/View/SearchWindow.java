@@ -12,9 +12,13 @@ public class SearchWindow extends JFrame implements Standardization{
 	private JButton searchB = new JButton("Search");
 	private JButton viewB = new JButton("View All Courses");
 	private JButton backB = new JButton("Back To Main Menu");
+	private JButton quitB = new JButton("Quit");
+	private JTextArea allCourses = new JTextArea();
+	private JScrollPane scroller = new JScrollPane(allCourses);
 	private JPanel north = new JPanel();
-	private JPanel center = new JPanel();
+//	private JPanel center = new JPanel();
 	private JPanel south = new JPanel();
+	private boolean addedName = false;
 	
 	public SearchWindow() {
 		super("Search Window");
@@ -32,16 +36,24 @@ public class SearchWindow extends JFrame implements Standardization{
 		viewB.setBackground(Color.white);
 		backB.setFont(buttonFont);
 		backB.setBackground(Color.white);
+		quitB.setFont(buttonFont);
+		quitB.setBackground(Color.white);
 		north.add(titleLabel);
 		north.add(subTitleLabel);
 		
+		allCourses.setEditable(false);
+		allCourses.setFont(standardFont);
+		scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		add("Center", scroller);
 		
 		south.add(searchB);
 		south.add(viewB);
 		south.add(backB);
+		south.add(quitB);
 		
 		add("North", north);
 		add("South", south);
+//		add("Center", center);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
@@ -55,6 +67,10 @@ public class SearchWindow extends JFrame implements Standardization{
 	
 	public void addBackListener(ActionListener listener) {
 		backB.addActionListener(listener);
+	}
+	
+	public void addQuitListener(ActionListener listener) {
+		quitB.addActionListener(listener);
 	}
 	
 	public String [] getCourse() {
@@ -77,12 +93,19 @@ public class SearchWindow extends JFrame implements Standardization{
 	}
 	
 	public void setStudentInfo(String name, String id) {
-		studentName = new JLabel("Welcome, "+name);
-		studentName.setFont(studentFont);
-		studentID = new JLabel("ID: "+id);
-		studentID.setFont(studentFont);
-		north.add(studentName);
-		north.add(studentID);
+		if (!addedName) {
+			studentName = new JLabel("Welcome, "+name);
+			studentName.setFont(studentFont);
+			studentID = new JLabel("ID: "+id);
+			studentID.setFont(studentFont);
+			north.add(studentName);
+			north.add(studentID);
+			addedName = true;
+		}
+	}
+	
+	public void viewAllCourses(String string) {
+		allCourses.setText(string);
 	}
 	
 //	public static void main (String []args) {

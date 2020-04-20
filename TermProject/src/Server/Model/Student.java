@@ -8,13 +8,12 @@ import java.util.ArrayList;
 
 import Server.Model.Registration;
 
-public class Student implements Serializable{
+public class Student{
 
 	private String studentName;
 	private int studentId;
 	private ArrayList<Registration> studentRegList;
 	private CourseCatalogue courseList;
-	private int choice;
 
 	
 	public Student () {
@@ -26,6 +25,15 @@ public class Student implements Serializable{
 		this.setStudentName(studentName);
 		this.setStudentId(studentId);
 		studentRegList = new ArrayList<Registration>();
+	}
+	
+	public boolean checkCourse(CourseOffering courseOff) {
+		for (Registration r: studentRegList) {
+			if(courseOff.equals(r.getTheOffering())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public String getStudentName() {
@@ -43,6 +51,10 @@ public class Student implements Serializable{
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
+	
+	public int getNumberOfRegistrations() {
+		return studentRegList.size();
+	}
 	@Override
 	public String toString () {
 		String st = "Student Name: " + getStudentName() + "\n" +
@@ -52,17 +64,17 @@ public class Student implements Serializable{
 
 public void addRegistration(Registration registration) {
 		
-		if(studentRegList.size() > 5) {
-			System.out.println(studentName + " is already registered to 6 courses");
-		}else if(checkCourseReg(registration)) {
-			System.out.println(studentName + " is already registered to that course");
-		}else
+		if(studentRegList.size() > 5||checkCourseReg(registration)) {
+			return;
+		}
+		else {
 			studentRegList.add(registration);
 
 		
 	}
+}
 	
-	private boolean checkCourseReg(Registration reg) {
+	public boolean checkCourseReg(Registration reg) {
 		
 		if(studentRegList.size() <= 0)
 			return false;
@@ -110,12 +122,6 @@ public void addRegistration(Registration registration) {
 		this.courseList = courseList;
 	}
 
-	public int getChoice() {
-		return choice;
-	}
 
-	public void setChoice(int choice) {
-		this.choice = choice;
-	}
 }
 

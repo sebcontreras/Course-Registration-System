@@ -32,6 +32,8 @@ public class LoginWindow extends JFrame implements Standardization{
 		north.add(titleLabel);
 		center.setLayout(new FlowLayout());
 		center.setBackground(Color.white);
+		name.setEditable(false);
+		id.setEditable(false);
 		center.add(name);
 		center.add(nameInput);
 		center.add(id);

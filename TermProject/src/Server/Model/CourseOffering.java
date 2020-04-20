@@ -47,9 +47,8 @@ public class CourseOffering {
 	}
 	@Override
 	public String toString () {
-		String st = "\n";
-		st += getTheCourse().getCourseName() + " " + getTheCourse().getCourseNum() + "\n";
-		st += "Section Num: " + getSecNum() + ", section cap: "+ getSecCap() +"\n";
+		String st = getTheCourse().getCourseName() + " " + getTheCourse().getCourseNum() + "\n";
+//		st += "Section Num: " + getSecNum() + ", section cap: "+ getSecCap() +"\n";
 		return st;
 	}
 	public void addRegistration(Registration registration) {
