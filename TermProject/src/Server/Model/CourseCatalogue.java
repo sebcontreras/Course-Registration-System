@@ -1,7 +1,7 @@
 package Server.Model;
 
 import java.util.ArrayList;
-
+//
 public class CourseCatalogue {
 
 	private ArrayList <Course> courseList;

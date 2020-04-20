@@ -26,14 +26,7 @@ public class GUIController {
 	private String id;
 
 	public GUIController(CommunicationController comController) {
-//		this.socket=socket;
-//		try {
-//			socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//			socketOut = new PrintWriter(socket.getOutputStream(), true);
-//		}catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
+
 		student = new Student();
 		frameManager = new FrameManager();
 		this.comController = comController;

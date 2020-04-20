@@ -3,7 +3,7 @@ package Server.Model;
 import java.util.ArrayList;
 
 import Server.Model.Registration;
-
+//
 public class Student {
 
 	private String studentName;

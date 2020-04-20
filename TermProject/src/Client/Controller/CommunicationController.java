@@ -8,13 +8,6 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-
-import Client.Model.*;
-import Client.View.*;
-import Server.Controller.DBController;
-import Server.Controller.ServerCommunicationController;
-
-//
 public class CommunicationController {
 	
 	private Socket socket;

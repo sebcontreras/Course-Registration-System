@@ -1,5 +1,5 @@
 package Client.View;
-//
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -13,7 +13,6 @@ public class MainWindow extends JFrame implements Standardization{
 	private JButton myCoursesB = new JButton("My Courses");
 	private JButton quitB = new JButton("Quit");
 	private JPanel north = new JPanel();
-	private JPanel center = new JPanel();
 	private JPanel south = new JPanel();
 	private boolean addedName = false;
 

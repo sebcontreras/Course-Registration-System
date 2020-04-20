@@ -2,6 +2,7 @@ package Server.Model;
 
 import java.sql.*;
 import java.util.ArrayList;
+//
 
 public class DBManager implements IDBCredentials{
 	

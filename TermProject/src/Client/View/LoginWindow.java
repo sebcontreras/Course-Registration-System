@@ -62,8 +62,4 @@ public class LoginWindow extends JFrame implements Standardization{
 		return field.getText();
 	}
 	
-//	public static void main (String args[]) {
-//		LoginWindow login = new LoginWindow();
-//		login.setVisible(true);
-//	}
 }

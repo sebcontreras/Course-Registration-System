@@ -1,5 +1,4 @@
 package Client.View;
-//
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -18,7 +17,6 @@ public class MyCourseWindow extends JFrame implements Standardization{
 	private JTextArea courses = new JTextArea();
 	private JScrollPane scroller = new JScrollPane(courses);
 	private JPanel north = new JPanel();
-	private JPanel center = new JPanel();
 	private JPanel south = new JPanel();
 	private boolean addedName = false;
 	
@@ -124,9 +122,5 @@ public class MyCourseWindow extends JFrame implements Standardization{
 		}
 	}
 
-//	public static void main (String []args) {
-//		MyCourseWindow myCourse = new MyCourseWindow();
-//		myCourse.setVisible(true);
-//	}
 
 }

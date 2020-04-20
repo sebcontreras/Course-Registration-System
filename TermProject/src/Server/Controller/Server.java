@@ -6,12 +6,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import Client.Controller.GUIController;
-import Client.View.FrameManager;
-import Client.View.LoginWindow;
-import Client.View.MainWindow;
-import Client.View.MyCourseWindow;
-import Client.View.SearchWindow;
+
 
 public class Server {
 	

@@ -1,5 +1,5 @@
 package Server.Model;
-
+//
 public class Registration {
 
 	private Student theStudent;

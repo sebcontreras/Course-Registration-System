@@ -1,5 +1,5 @@
 package Client.View;
-//
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -16,7 +16,6 @@ public class SearchWindow extends JFrame implements Standardization{
 	private JTextArea allCourses = new JTextArea();
 	private JScrollPane scroller = new JScrollPane(allCourses);
 	private JPanel north = new JPanel();
-//	private JPanel center = new JPanel();
 	private JPanel south = new JPanel();
 	private boolean addedName = false;
 	
@@ -53,7 +52,6 @@ public class SearchWindow extends JFrame implements Standardization{
 		
 		add("North", north);
 		add("South", south);
-//		add("Center", center);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
@@ -108,8 +106,5 @@ public class SearchWindow extends JFrame implements Standardization{
 		allCourses.setText(string);
 	}
 	
-//	public static void main (String []args) {
-//		SearchWindow search = new SearchWindow();
-//		search.setVisible(true);
-//	}
+
 }

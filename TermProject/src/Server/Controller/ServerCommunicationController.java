@@ -6,20 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 
-import Client.Controller.GUIController;
-import Client.View.FrameManager;
-import Client.View.LoginWindow;
-import Client.View.MainWindow;
-import Client.View.MyCourseWindow;
-import Client.View.SearchWindow;
+
 import Server.Model.Course;
-import Server.Model.CourseCatalogue;
-import Server.Model.CourseOffering;
-import Server.Model.Registration;
-import Server.Model.Student;
 
 //
 public class ServerCommunicationController implements Runnable{
