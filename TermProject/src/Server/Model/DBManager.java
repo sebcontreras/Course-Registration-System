@@ -3,7 +3,7 @@ package Server.Model;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DBManager {
+public class DBManager implements IDBCredentials{
 	
 	private Connection conn;
 	private Statement stmt;
@@ -39,8 +39,8 @@ public class DBManager {
 		}
 	}
 	
-	public ArrayList<Course> readCourseDataBase() {
-		String query = "SELECT * FROM termproject.courses where courseName= ? and courseNum= ?";
+	public ArrayList<Course> readCourseFromDataBase() {
+		String query = "SELECT * FROM termproject.courses where name= ? and number= ?";
 		PreparedStatement pStat = null;
 		try {
 			pStat = conn.prepareStatement(query);
@@ -67,8 +67,8 @@ public class DBManager {
 		return courseList;
 	}
 	
-	public ArrayList<Course> readStudentFromDataBase() {
-		String query = "SELECT * FROM termproject.student where courseName= ? and courseNum= ?";
+	public ArrayList<Student> readStudentFromDataBase() {
+		String query = "SELECT * FROM termproject.student where id= ? and first= ? and last= ?";
 		PreparedStatement pStat = null;
 		try {
 			pStat = conn.prepareStatement(query);
@@ -90,9 +90,9 @@ public class DBManager {
 					e.printStackTrace();
 				}
 		}
-		addOfferings();
 		
-		return courseList;
+		
+		return studentList;
 	}
 	
 	/**public ArrayList<Course> readCourseFromDataBase() {
