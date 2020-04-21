@@ -10,7 +10,7 @@ import Client.View.FrameManager;
 /**
  * This class controls the GUI. Its main job is establishing the action listeners for each window.
  * 
- * @author sebastiancontreras
+ * @author Michael Vassilev 30068475, Vic Phan 30061885, Sebastian Contreras 30062418
  *
  */
 public class GUIController {

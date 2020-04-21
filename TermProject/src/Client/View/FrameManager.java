@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
  * It creates each window in the application, assigns actionListeners and 
  * manages the messages to be displayed by each window.
  * 
- * @author sebastiancontreras
+ * @author Michael Vassilev 30068475, Vic Phan 30061885, Sebastian Contreras 30062418s
  *
  */
 public class FrameManager {

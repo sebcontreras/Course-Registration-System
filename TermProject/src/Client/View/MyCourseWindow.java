@@ -9,7 +9,7 @@ import javax.swing.*;
  * This class houses the myCourse window. It is responsible for setting the layout of the myCourse window 
  * and assigning action listeners.
  * 
- * @author sebastiancontreras
+ * @author Michael Vassilev 30068475, Vic Phan 30061885, Sebastian Contreras 30062418
  *
  */
 public class MyCourseWindow extends JFrame implements Standardization{

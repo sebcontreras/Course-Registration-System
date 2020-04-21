@@ -10,7 +10,7 @@ import java.net.Socket;
 /**
  * This class is responsible for establishing a connection from the client to the server.
  * 
- * @author sebastiancontreras
+ * @author Michael Vassilev 30068475, Vic Phan 30061885, Sebastian Contreras 30062418
  *
  */
 public class CommunicationController {

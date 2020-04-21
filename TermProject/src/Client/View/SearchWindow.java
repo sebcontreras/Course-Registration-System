@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
  * This class houses the search window. It is responsible for setting the layout of the search window 
  * and assigning action listeners.
  * 
- * @author sebastiancontreras
+ * @author Michael Vassilev 30068475, Vic Phan 30061885, Sebastian Contreras 30062418
  *
  */
 public class SearchWindow extends JFrame implements Standardization{

@@ -4,7 +4,7 @@ import java.awt.Font;
 /**
  * This class is responsible for setting the font for the windows used in the application.
  * 
- * @author sebastiancontreras
+ * @author Michael Vassilev 30068475, Vic Phan 30061885, Sebastian Contreras 30062418
  *
  */
 public interface Standardization {

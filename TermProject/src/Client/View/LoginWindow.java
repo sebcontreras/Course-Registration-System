@@ -11,7 +11,7 @@ import javax.swing.*;
  * This class houses the login window. It is responsible for setting the layout for the login
  * window and returning the inputed values from the text areas.
  * 
- * @author sebastiancontreras
+ * @author Michael Vassilev 30068475, Vic Phan 30061885, Sebastian Contreras 30062418
  *
  */
 public class LoginWindow extends JFrame implements Standardization{
