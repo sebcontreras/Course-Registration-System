@@ -4,21 +4,85 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+
+/**
+ * This class houses the search window. It is responsible for setting the layout of the search window 
+ * and assigning action listeners.
+ * 
+ * @author sebastiancontreras
+ *
+ */
 public class SearchWindow extends JFrame implements Standardization{
+	
+	
+	/**
+	 * The title label for the SearchWindow.
+	 */
 	private JLabel titleLabel = new JLabel("Student Registration System");
+	
+	/**
+	 * The studentName label.
+	 */
 	private JLabel studentName = new JLabel();
+	
+	/**
+	 * The student ID label.
+	 */
 	private JLabel studentID = new JLabel();
+	
+	/**
+	 * The subtitle label for the search window.
+	 */
 	private JLabel subTitleLabel = new JLabel("Search Window");
+	
+	/**
+	 * The button for the 'search' method
+	 */
 	private JButton searchB = new JButton("Search");
+	
+	/**
+	 * The button for the 'view all courses' method
+	 */
 	private JButton viewB = new JButton("View All Courses");
+	
+	/**
+	 * The button for the 'back to main menu' method
+	 */
 	private JButton backB = new JButton("Back To Main Menu");
+	
+	/**
+	 * The button for the 'quit' method
+	 */
 	private JButton quitB = new JButton("Quit");
+	
+	/**
+	 * The text area for the student's courses to be displayed
+	 */
 	private JTextArea allCourses = new JTextArea();
+	
+	/**
+	 * The window scroller for the SearchWindow
+	 */
 	private JScrollPane scroller = new JScrollPane(allCourses);
+	
+	/**
+	 * The north JPanel
+	 */
 	private JPanel north = new JPanel();
+	
+	/**
+	 * The south JPanel
+	 */
 	private JPanel south = new JPanel();
+	
+	/**
+	 * Boolean variable to determine if the login student name has been added
+	 */
 	private boolean addedName = false;
 	
+	/**
+	 * Constructor for the SearchWindow. Sets the layout of the searchWindow pane.
+	 */
 	public SearchWindow() {
 		super("Search Window");
 		setSize(500,500);
@@ -55,22 +119,47 @@ public class SearchWindow extends JFrame implements Standardization{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	/**
+	 * Method adds the action listener to 'add courses'
+	 * 
+	 * @param listener the listener to be added
+	 */
 	public void addSearchListener(ActionListener listener) {
 		searchB.addActionListener(listener);
 	}
 	
+	/**
+	 * Method adds the action listener to 'add view'
+	 * 
+	 * @param listener the listener to be added
+	 */
 	public void addViewListener(ActionListener listener) {
 		viewB.addActionListener(listener);
 	}
 	
+	/**
+	 * Method adds the action listener to 'back'
+	 * 
+	 * @param listener the listener to be added
+	 */
 	public void addBackListener(ActionListener listener) {
 		backB.addActionListener(listener);
 	}
 	
+	/**
+	 * Method adds the action listener to 'quit'
+	 * 
+	 * @param listener the listener to be added
+	 */
 	public void addQuitListener(ActionListener listener) {
 		quitB.addActionListener(listener);
 	}
 	
+	/**
+	 * Gets course from the input, formats the result and returns it as a string array.
+	 * 
+	 * @return string array of the course
+	 */
 	public String [] getCourse() {
 		String input ="";
 		String [] course;
@@ -86,10 +175,21 @@ public class SearchWindow extends JFrame implements Standardization{
 		return course;
 	}
 	
+	/**
+	 * Displays the parameter string to the JOptionPane.
+	 * 
+	 * @param string the string to be displayed
+	 */
 	public void displayMessage(String s) {
 		JOptionPane.showMessageDialog(this, s);
 	}
 	
+	/**
+	 * Sets the student info of the logged in student to be shown in the display window.
+	 * 
+	 * @param name the name of the student
+	 * @param id the ID of the student
+	 */
 	public void setStudentInfo(String name, String id) {
 		if (!addedName) {
 			studentName = new JLabel("Welcome, "+name);
@@ -102,6 +202,11 @@ public class SearchWindow extends JFrame implements Standardization{
 		}
 	}
 	
+	/**
+	 * Methods which displays all courses.
+	 * 
+	 * @param string the courses to be displayed
+	 */
 	public void viewAllCourses(String string) {
 		allCourses.setText(string);
 	}

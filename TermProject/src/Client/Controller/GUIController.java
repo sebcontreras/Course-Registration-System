@@ -6,25 +6,58 @@ import java.awt.event.ActionListener;
 
 import Client.View.FrameManager;
 
+
+/**
+ * This class controls the GUI. Its main job is establishing the action listeners for each window.
+ * 
+ * @author sebastiancontreras
+ *
+ */
 public class GUIController {
+	
+	/**
+	 * The manager which is in charge of managing the frames in the application 
+	 */
 	private FrameManager frameManager;
+	
+	/**
+	 * The communication controller which connects with the server
+	 */
 	private CommunicationController comController;
+	
+	/**
+	 * The name of the student who is logged in
+	 */
 	private String name;
+	
+	/**
+	 * The ID of the student who is logged in
+	 */
 	private String id;
 
+	/**
+	 * Constructor which assigns the communication controller from the parameter, and 
+	 * creates the frame manager object.
+	 * 
+	 * @param comController the controller which connects with the server
+	 */
 	public GUIController(CommunicationController comController) {
 
 		frameManager = new FrameManager();
 		this.comController = comController;
 	}
 	
-
-	
+	/**
+	 * Method which calls the frame manager to start and adds listeners to the login.
+	 */
 	public void start() {
 		frameManager.start();
 		frameManager.addListenersToLogin(new loginLoginListener());
 	}
 	
+	/**
+	 * Method which makes the program quit.
+	 */
 	public class quitListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -32,6 +65,10 @@ public class GUIController {
 		}
 	}
 	
+	/**
+	 * Assigns the name and ID by calling helper functions. Once the name and ID are received it closes the login window,
+	 * and displays the main menu.
+	 */
 	public class loginLoginListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -44,14 +81,18 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Calls the frame manager to display the main menu.
+	 */
 	public void displayMainMenu() {
 		frameManager.mainSetStudentInfo(name, id);
 		frameManager.displayMainWindow();
 		frameManager.addListenersToMainMenu(new mainSearchCoursesListener(), new mainMyCoursesListener(), new quitListener());
 	}
 
-
-	// listener for "Search Courses" button in main
+	/**
+	 * Listener for "Search Courses" button in main.
+	 */
 	public class mainSearchCoursesListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -64,7 +105,9 @@ public class GUIController {
 
 	}
 
-	// listener for "My Courses" button in main
+	/**
+	 * Listener for "My Courses" button in main.
+	 */
 	public class mainMyCoursesListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -78,7 +121,9 @@ public class GUIController {
 		}
 	}
 
-	// listener for "Add Course" button in My Course window
+	/**
+	 * Listener for "Add Course" button in My Course window
+	 */
 	public class myCourseAddCourseListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -91,7 +136,9 @@ public class GUIController {
 		}
 	}
 
-	// listener for "Drop Course" button in My Course window
+	/**
+	 * Listener for "Drop Course" button in My Course window
+	 */
 	public class myCourseDropCourseListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -101,7 +148,9 @@ public class GUIController {
 		}
 	}
 
-	// listener for "Return to Main Menu" button in My Course window
+	/**
+	 * Listener for "Return to Main Menu" button in My Course window
+	 */
 	public class myCourseReturnListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -110,7 +159,9 @@ public class GUIController {
 		}
 	}
 
-	// listener for "Search" button in search window
+	/**
+	 * Listener for "Search" button in search window
+	 */
 	public class searchSearchListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -126,7 +177,9 @@ public class GUIController {
 		}
 	}
 
-	// listener for "View All" button in search window
+	/**
+	 * Listener for "View All" button in search window
+	 */
 	public class searchViewAllListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -135,7 +188,9 @@ public class GUIController {
 		}
 	}
 
-	// listener for "Return to Main Menu" button in search window
+	/**
+	 * Listener for "Return to Main Menu" button in search window
+	 */
 	public class searchBackListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {

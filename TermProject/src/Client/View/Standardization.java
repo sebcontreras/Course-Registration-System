@@ -1,7 +1,12 @@
 package Client.View;
 import java.awt.Font;
 
-
+/**
+ * This class is responsible for setting the font for the windows used in the application.
+ * 
+ * @author sebastiancontreras
+ *
+ */
 public interface Standardization {
 	//standardizes fonts across view 
 	static final Font titleFont = new Font("Verdana", Font.BOLD, 18);
