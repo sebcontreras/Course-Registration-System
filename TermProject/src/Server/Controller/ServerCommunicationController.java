@@ -137,6 +137,7 @@ public class ServerCommunicationController implements Runnable{
 	}
 
 	public void searchForCourse(String courseName, String courseNum){
+		courseName = courseName.toUpperCase();
 		String output = database.searchForCourse(courseName, Integer.parseInt(courseNum));
 		if (output==null) {
 			socketOut.println("Sorry, course not found"+"\0");
