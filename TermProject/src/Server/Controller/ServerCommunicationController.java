@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 
@@ -109,7 +108,7 @@ public class ServerCommunicationController implements Runnable{
 		}
 	}
 	/**
-	 * this method searches for the user's id and name in the database for the login feature, and sends comfirmation 
+	 * this method searches for the user's id and name in the database for the login feature, and sends confirmation 
 	 * to the client side in String form
 	 * @param studentName, the name of the user
 	 * @param studentID, the id of the user
