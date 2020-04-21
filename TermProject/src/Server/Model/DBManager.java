@@ -3,23 +3,45 @@ package Server.Model;
 import java.sql.*;
 import java.util.ArrayList;
 //
-
+/**
+ * The purpose of this class is to access the database and retrieve information
+ * @author Michael Vassilev 30068475, Vic Phan 30061885, Sebastian Contreras 30062418
+ *
+ */
 public class DBManager implements IDBCredentials{
-	
+	/*
+	 * the connection to the database
+	 */
 	private Connection conn;
+	/*
+	 * the query sent to the database
+	 */
 	private Statement stmt;
+	/*
+	 * the output of the database
+	 */
 	private ResultSet rs;
-	
+	/*
+	 * the list of courses acquired from the database
+	 */
 	private ArrayList <Course> courseList;
+	/*
+	 * the list of students acquired from the database
+	 */
 	private ArrayList <Student> studentList;
-
+	/**
+	 * constructs an instance of DBManager and initiates the connection 
+	 * to the database
+	 */
 	public DBManager () {
 		courseList = new ArrayList<Course>();
 		studentList = new ArrayList<Student>();
 		initializeConnection();
 	}
 	
-	//needs to be called
+	/**
+	 * this method initiates the connection with the database
+	 */
 	public void initializeConnection() {
 		try {
 			Driver driver = new com.mysql.cj.jdbc.Driver();
@@ -30,7 +52,10 @@ public class DBManager implements IDBCredentials{
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * this method closes all connections with the database and closes the 
+	 * objects used for those connections
+	 */
 	public void close() {
 		try {
 			stmt.close();
@@ -40,7 +65,10 @@ public class DBManager implements IDBCredentials{
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * this method reads the courses from the database and slots them into the course list
+	 * @return the course list
+	 */
 	public ArrayList<Course> readCourseFromDataBase() {
 		String query = "SELECT * FROM COURSES";
 		PreparedStatement pStat = null;
@@ -68,7 +96,10 @@ public class DBManager implements IDBCredentials{
 		
 		return courseList;
 	}
-	
+	/**
+	 * this method reads the students from the database and slots them into the student list
+	 * @return the student list
+	 */
 	public ArrayList<Student> readStudentFromDataBase() {
 		String query = "SELECT * FROM STUDENT";
 		PreparedStatement pStat = null;
@@ -96,7 +127,9 @@ public class DBManager implements IDBCredentials{
 		
 		return studentList;
 	}
-	
+	/**
+	 * this method adds course offerings to the courses
+	 */
 	private void addOfferings() {
 		int index = 0;
 		for(Course i : courseList) {
@@ -112,7 +145,11 @@ public class DBManager implements IDBCredentials{
 			index++;
 		}
 	}
-	
+	/**
+	 * this method sets the section numbers for the course offerings
+	 * @param index the index in the course list
+	 * @return the section numbers
+	 */
 	private int setSec(int index) {
 		int numberOfOfferings = 1;
 		if(index % 3 == 0)
@@ -125,7 +162,12 @@ public class DBManager implements IDBCredentials{
 			numberOfOfferings = 5;
 		return numberOfOfferings;
 	}
-	
+	/**
+	 * this method sets the capacity for course offerings
+	 * @param index, the index in the course list
+	 * @param sec, the section of a course
+	 * @return the capacity of a course offering
+	 */
 	private int setCapacity(int index, int sec) {
 		
 		int capacity = 100;
